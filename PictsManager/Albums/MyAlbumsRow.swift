@@ -21,12 +21,11 @@ struct MyAlbumsRow: View {
         Spacer()
         if (afficherToutButton) {
           NavigationLink {
-            AlbumsListView(title: "My albums", albums: [Album(id: 30, name: "Vacances", pictureNames: ["turtlerock"])])
+            AlbumsListView(title: rowTitle, albums: albums)
           } label: {
             Text("Tout afficher")
               .foregroundStyle(Color.blue)
           }
-          .buttonStyle(.bordered)
         }
       }
       .padding(.horizontal)

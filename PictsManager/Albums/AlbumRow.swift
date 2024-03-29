@@ -20,8 +20,8 @@ struct AlbumRow: View {
           .frame(alignment: .leading)
         Spacer()
         if (afficherToutButton) {
-          Button {
-//            AlbumsView()
+          NavigationLink {
+            AlbumsListView(title: rowTitle, albums: albums)
           } label: {
             Text("Tout afficher")
               .foregroundStyle(Color.blue)
