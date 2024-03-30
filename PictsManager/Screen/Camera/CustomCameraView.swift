@@ -32,17 +32,49 @@ struct CustomCameraView: View {
                     print(err.localizedDescription)
                 }
             }
+
+
             
             VStack {
                 Spacer()
-                Button(action: {
-                    cameraViewModel.capturePhoto()
-                }, label: {
-                    Image(systemName: "circle")
-                        .font(.system(size: 72))
-                        .foregroundColor(.white)
-                })
-                .padding(.bottom)
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        //TODO check gallery
+                    }, label: {
+                        Image(systemName: "circle.fill")
+                                .frame(width: 25.0)
+                                .font(.system(size: 15))
+                                .foregroundColor(.black)
+                                .padding()
+                    })
+                            .background(Color.black.opacity(1))
+                            .clipShape(Circle())
+                    
+                    Button(action: {
+                        cameraViewModel.capturePhoto()
+                    }, label: {
+                        Image(systemName: "circle")
+                                .font(.system(size: 72))
+                                .foregroundColor(.white)
+                                .padding(.bottom)
+                    })
+                    
+                    Button(action: {
+                        cameraViewModel.switchCamera()
+                    }, label: {
+                        Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                .frame(width: 25.0)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                                .padding()
+                    })
+                            .background(Color.black.opacity(0.7))
+                            .clipShape(Circle())
+                
+                    Spacer()
+                }
             }
         }
     }

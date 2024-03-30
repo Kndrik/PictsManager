@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 class CameraViewModel {
-    
+
     var session: AVCaptureSession?
     var delegate: AVCapturePhotoCaptureDelegate?
     
@@ -69,6 +69,40 @@ class CameraViewModel {
             }
         }
     }
+
+    func switchCamera() {
+        guard let currentCameraInput: AVCaptureInput = session?.inputs.first else {
+            return
+        }
+
+        session?.beginConfiguration()
+        defer { session?.commitConfiguration() }
+
+        session?.removeInput(currentCameraInput)
+
+        if let input = currentCameraInput as? AVCaptureDeviceInput {
+            let newCameraDevice = input.device.position == .back ? getCamera(with: .front) : getCamera(with: .back)
+            let newVideoInput = try? AVCaptureDeviceInput(device: newCameraDevice!)
+            if session?.canAddInput(newVideoInput!) == true {
+                session?.addInput(newVideoInput!)
+            } else {
+                print("Impossible d'ajouter l'entrée pour la nouvelle caméra")
+                session?.addInput(currentCameraInput)
+            }
+        }
+    }
+
+    func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified).devices
+        for device in devices {
+            if device.position == position {
+                return device
+            }
+        }
+        return nil
+    }
+
+
     
     func capturePhoto(with settings: AVCapturePhotoSettings = AVCapturePhotoSettings()) {
           output.capturePhoto(with: settings, delegate: self.delegate!)
