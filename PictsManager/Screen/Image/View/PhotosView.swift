@@ -16,7 +16,6 @@ struct Photos: View {
             VStack{
                 Spacer()
                 PeriodSelector()
-
             }
             .padding(.bottom, 10)
         }

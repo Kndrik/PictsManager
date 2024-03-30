@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AlbumsView: View {
+struct AlbumsScreen: View {
   @State private var addingAlbum = false
   @State private var addingFolder = false;
   @State private var title = ""
@@ -95,5 +95,5 @@ struct AlbumsView: View {
 }
 
 #Preview {
-  AlbumsView()
+  AlbumsScreen()
 }

@@ -22,16 +22,18 @@ struct Navbar: View {
                         Text("Photothèque")
                     }
                 
-                AlbumsView()
+                AlbumsScreen()
                     .tabItem {
                         Image(systemName: "rectangle.stack.fill")
                         Text("Albums")
-                    }                
+                    }
+                
                 CameraScreen()
                     .tabItem {
                         Image(systemName: "camera")
                         Text("")
                     }
+                
                 Search()
                     .tabItem {
                         Image(systemName: "magnifyingglass")

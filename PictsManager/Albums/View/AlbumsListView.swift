@@ -16,7 +16,7 @@ struct AlbumsListView: View {
           LazyVGrid(columns: [GridItem(.adaptive(minimum: 175))], spacing: 10) {
             ForEach(albums) { album in
               NavigationLink {
-                AlbumsView()
+                AlbumsScreen()
               } label: {
                 AlbumPreview(album: album)
               }

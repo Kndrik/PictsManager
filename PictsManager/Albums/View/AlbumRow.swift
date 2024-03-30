@@ -12,8 +12,10 @@ struct AlbumRow: View {
   var rowTitle: String
   var albums: [Album]
   var afficherToutButton: Bool
+    
   var body: some View {
     VStack(alignment: .leading) {
+        
       HStack {
         Text(rowTitle)
           .font(.system(size: 23)).fontWeight(.bold)
@@ -32,12 +34,13 @@ struct AlbumRow: View {
       .padding(.top, 10)
       .buttonStyle(PlainButtonStyle())
       
+        
       ScrollView(.horizontal, showsIndicators: false) {
         VStack {
           HStack(alignment: .top, spacing: 10) {
             ForEach(albums) { album in
               NavigationLink {
-                AlbumsView()
+                AlbumsScreen()
               } label: {
                 AlbumPreview(album: album)
               }
@@ -49,6 +52,7 @@ struct AlbumRow: View {
         }
       }
       .scrollTargetBehavior(.viewAligned)
+        
     }
     .padding(.bottom, 30)
     .listRowInsets(EdgeInsets())

@@ -12,6 +12,7 @@ struct MyAlbumsRow: View {
   var rowTitle: String
   var albums: [Album]
   var afficherToutButton: Bool
+    
   var body: some View {
     VStack(alignment: .leading) {
       HStack {
@@ -32,19 +33,22 @@ struct MyAlbumsRow: View {
       .padding(.top, 10)
       .buttonStyle(PlainButtonStyle())
       
+        
       ScrollView(.horizontal, showsIndicators: false) {
         VStack(alignment: .leading, spacing: 20) {
           HStack(alignment: .top, spacing: 10) {
+              
             NavigationLink {
-              AlbumsView()
+              PhotosList()
             } label: {
               AlbumPreview(album: Album(id: 17, name: "Récentes", pictureNames: [""]))
             }
             .buttonStyle(PlainButtonStyle())
+              
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 == 0) {
                 NavigationLink {
-                  AlbumsView()
+                    PhotosList()
                 } label: {
                   AlbumPreview(album: album)
                 }
@@ -54,17 +58,19 @@ struct MyAlbumsRow: View {
           }
           .padding(.horizontal)
           
+            
           HStack(alignment: .top, spacing: 10) {
             NavigationLink {
-              AlbumsView()
+              PhotosList()
             } label: {
               FavoritesAlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]))
             }
             .buttonStyle(PlainButtonStyle())
+              
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 != 0) {
                 NavigationLink {
-                  AlbumsView()
+                  PhotosList()
                 } label: {
                   AlbumPreview(album: album)
                 }
@@ -74,6 +80,7 @@ struct MyAlbumsRow: View {
           }
           .padding(.horizontal)
           .scrollTargetLayout()
+            
         }
       }
       .scrollTargetBehavior(.viewAligned)
