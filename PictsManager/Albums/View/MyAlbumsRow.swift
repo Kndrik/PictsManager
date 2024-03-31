@@ -39,7 +39,8 @@ struct MyAlbumsRow: View {
           HStack(alignment: .top, spacing: 10) {
               
             NavigationLink {
-              PhotosList()
+                AlbumsScreen()
+//              PhotosList()
             } label: {
               AlbumPreview(album: Album(id: 17, name: "Récentes", pictureNames: [""]))
             }
@@ -48,7 +49,8 @@ struct MyAlbumsRow: View {
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 == 0) {
                 NavigationLink {
-                    PhotosList()
+                    AlbumsScreen()
+//                    PhotosList()
                 } label: {
                   AlbumPreview(album: album)
                 }
@@ -61,7 +63,8 @@ struct MyAlbumsRow: View {
             
           HStack(alignment: .top, spacing: 10) {
             NavigationLink {
-              PhotosList()
+                AlbumsScreen()
+//              PhotosList()
             } label: {
               FavoritesAlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]))
             }
@@ -70,7 +73,8 @@ struct MyAlbumsRow: View {
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 != 0) {
                 NavigationLink {
-                  PhotosList()
+                    AlbumsScreen()
+//                  PhotosList()
                 } label: {
                   AlbumPreview(album: album)
                 }

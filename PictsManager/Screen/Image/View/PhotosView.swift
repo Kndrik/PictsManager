@@ -12,7 +12,7 @@ struct Photos: View {
     var body: some View {
 
         ZStack {
-                PhotosList()
+//                PhotosList()
             VStack{
                 Spacer()
                 PeriodSelector()

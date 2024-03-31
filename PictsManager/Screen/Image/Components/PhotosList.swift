@@ -10,6 +10,7 @@ import SwiftUI
 struct PhotosList: View {
     @State private var selectedImage: ImageLoader?
     @State private var isImageSelected: Bool = false
+    var pictureURLs: [String]
 
     func close() -> Void {
         selectedImage = nil
@@ -22,9 +23,10 @@ struct PhotosList: View {
 
         ScrollView {
             LazyVGrid(columns: columns, spacing: 5) {
-                ForEach(1...99, id: \.self) { i in
-
-                    el.aspectRatio(contentMode: .fill)
+                
+                ForEach(pictureURLs, id: \.self) { imageURL in
+                    let imageLoader = ImageLoader(url: imageURL)
+                    imageLoader.aspectRatio(contentMode: .fill)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                         .clipped()
                         .aspectRatio(1, contentMode: .fit)
@@ -33,6 +35,18 @@ struct PhotosList: View {
                             isImageSelected = true
                         }
                 }
+                    
+//                ForEach(1...99, id: \.self) { i in
+//
+//                    el.aspectRatio(contentMode: .fill)
+//                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+//                        .clipped()
+//                        .aspectRatio(1, contentMode: .fit)
+//                        .onTapGesture {
+//                            selectedImage = el
+//                            isImageSelected = true
+//                        }
+//                }
             }
             Color.clear.frame(height: 55)
         }.fullScreenCover(isPresented: $isImageSelected) {
@@ -40,13 +54,20 @@ struct PhotosList: View {
             if selectedImage != nil {
                 ImageDetail(image: selectedImage!)
             }
-
+            
         }
     }
 }
 
-#Preview {
-    PhotosList()
+//#Preview {
+//    PhotosList()
+//}
+    
+struct PhotoList_Preview: PreviewProvider {
+    static var previews: some View {
+        let album = Album(id: 17, name: "Favorites", pictureNames: ["turtlerock", "turtlerock"])
+        PhotosList(pictureURLs: album.pictureNames)
+    }
 }
 
 struct ImageLoader: View {
