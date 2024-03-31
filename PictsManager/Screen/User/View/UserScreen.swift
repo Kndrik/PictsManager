@@ -27,29 +27,34 @@ struct UserScreen: View {
                 
                 Spacer()
         
-                TextField("Username", text: /*$viewModel.user.username*/ $editableUsername)
+                TextField("Username", text: $editableUsername)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
                     .autocapitalization(.none)
                     .disabled(!isEditing)
+                    .scaleEffect(isEditing ? 1.1 : 1.0)
+                    .animation(.easeInOut(duration: 0.2), value: isEditing)
                 
-                TextField("Email", text: /*$viewModel.user.email*/ $editableEmail)
+                TextField("Email", text: $editableEmail)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
                     .autocapitalization(.none)
                     .disabled(!isEditing)
+                    .scaleEffect(isEditing ? 1.1 : 1.0)
+                    .animation(.easeInOut(duration: 0.2), value: isEditing)
                 
-                SecureField("Password", text: /*$viewModel.user.email*/ $editableEmail)
+                SecureField("Password", text: $editableEmail)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
-                    .textCase(.lowercase)
                     .disabled(!isEditing)
+                    .scaleEffect(isEditing ? 1.1 : 1.0)
+                    .animation(.easeInOut(duration: 0.2), value: isEditing)
                 
                 Button(action: {
                     authViewModel.logout()
