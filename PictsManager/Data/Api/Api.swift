@@ -18,6 +18,9 @@ struct Api {
         static let login = endpoint(path: "/auth/login")
         static let register = endpoint(path: "/auth/register")
         static let loginWithToken = endpoint(path: "auth/login-with-token")
+    }
+    
+    struct User {
         static let me = endpoint(path: "/users/me")
     }
     

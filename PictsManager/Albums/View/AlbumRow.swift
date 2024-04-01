@@ -40,7 +40,8 @@ struct AlbumRow: View {
           HStack(alignment: .top, spacing: 10) {
             ForEach(albums) { album in
               NavigationLink {
-                AlbumsScreen()
+//                AlbumsScreen()
+//                  PhotosList(pictureURLs: album.pictures)
               } label: {
                 AlbumPreview(album: album)
               }

@@ -8,14 +8,12 @@
 import Foundation
 
 class UserViewModel: ObservableObject {
-    
     @Published var user: User?
     @Published var userRepsonse: UserResponse?
     @Published var errorMessage: String? = ""
     
     func fetchUser() async {
-        print(Api.Auth.me)
-        guard let url = URL(string: Api.Auth.me) else {
+        guard let url = URL(string: Api.User.me) else {
             self.errorMessage = "Invalid URL for users/me endpoint"
             return
         }
@@ -52,6 +50,17 @@ class UserViewModel: ObservableObject {
                 }
             }
         }.resume()
+    }
+    
+    func patchUser() {
+        // TODO: PATCH method
+        guard let url = URL(string: Api.User.me) else {
+            self.errorMessage = "Invalid URL for users/me endpoint"
+            return
+        }
+        
+        var request =  URLRequest(url: url)
+        request.httpMethod = "PATCH"
     }
 }
         
