@@ -6,15 +6,14 @@
 //
 
 import Foundation
+import OSLog
 
 class AuthViewModel: ObservableObject {
-    
-    @Published var errorMessage: String? = ""
-    
+        
     /// Simple login with form
     func login(login: String, password: String, completion: @escaping (Bool) -> Void) async {
         guard let url = URL(string: Api.Auth.login) else {
-            self.errorMessage = "Invalid URL for login endpoint"
+            Logger.auth.error("Invalid URL for login endpoint")
             completion(false)
             return
         }
@@ -27,7 +26,7 @@ class AuthViewModel: ObservableObject {
  
         
         guard let jsonData = try? JSONEncoder().encode(loginForm) else {
-            self.errorMessage = "Failed to encode user data"
+            Logger.auth.error("Failed to encode user data")
             completion(false)
             return
         }
@@ -36,7 +35,7 @@ class AuthViewModel: ObservableObject {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                self.errorMessage = error?.localizedDescription
+                Logger.auth.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
                 completion(false)
                 return
             }
@@ -48,9 +47,9 @@ class AuthViewModel: ObservableObject {
                 }
             } else {
                 if let errorMessage = String(data: data, encoding: .utf8) {
-                    self.errorMessage = errorMessage
+                    Logger.auth.error("\(errorMessage)")
                 } else {
-                    self.errorMessage = error?.localizedDescription
+                    Logger.auth.error("\(error?.localizedDescription ?? "Unknown error")")
                 }
                 completion(false)
             }
@@ -75,7 +74,7 @@ class AuthViewModel: ObservableObject {
     /// Registration with form
     func register(email: String, username: String, password: String) {
         guard let url = URL(string: Api.Auth.register) else {
-            self.errorMessage = "Invalid URL for register endpoint"
+            Logger.auth.error("Invalid URL for login endpoint")
             return
         }
         
@@ -86,7 +85,7 @@ class AuthViewModel: ObservableObject {
         let registerForm = RegisterForm(email: email, username: username, password: password)
  
         guard let jsonData = try? JSONEncoder().encode(registerForm) else {
-            self.errorMessage = "Failed to encode user data"
+            Logger.auth.error("Failed to encode user data")
             return
         }
         
@@ -94,7 +93,7 @@ class AuthViewModel: ObservableObject {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                self.errorMessage = "Error"
+                Logger.auth.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
             
@@ -106,9 +105,9 @@ class AuthViewModel: ObservableObject {
                     print("After UserSession", UserSessionManager.shared.isAuthenticated)
                 } else {
                     if let errorMessage = String(data: data, encoding: .utf8) {
-                        self.errorMessage = errorMessage
+                        Logger.auth.error("\(errorMessage)")
                     } else {
-                        self.errorMessage = "Error"
+                        Logger.auth.error("\(error?.localizedDescription ?? "Unknown error")")
                     }
                 }
             }

@@ -6,15 +6,15 @@
 //
 
 import Foundation
+import OSLog
 
 class UserViewModel: ObservableObject {
     @Published var user: User?
     @Published var userRepsonse: UserResponse?
-    @Published var errorMessage: String? = ""
-    
+
     func fetchUser() async {
         guard let url = URL(string: Api.User.me) else {
-            self.errorMessage = "Invalid URL for users/me endpoint"
+            Logger.user.debug("Invalid URL for users/me endpoint")
             return
         }
          
@@ -24,38 +24,29 @@ class UserViewModel: ObservableObject {
         if let token = UserSessionManager.shared.getToken() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else {
-            self.errorMessage = "User not authenticated"
+            Logger.user.error("User not authenticated")
             return
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                self.errorMessage = error?.localizedDescription ?? "Unknown error"
-                return
-            }
-            
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    if let decodedUser = try? JSONDecoder().decode(UserResponse.self, from: data) {
-                        DispatchQueue.main.async {
-                            self.user = User(_id: decodedUser.id, email: decodedUser.email, username: decodedUser.username, token: UserSessionManager.shared.getToken() ?? "")      
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.errorMessage = "Failed to decode user data"
-                        }
-                    }
-            } else {
+                let decodedUser = try JSONDecoder().decode(UserResponse.self, from: data)
                 DispatchQueue.main.async {
-                    self.errorMessage = "Failed to fetch user data"
+                    self.user = User(_id: decodedUser.id, email: decodedUser.email, username: decodedUser.username, token: UserSessionManager.shared.getToken() ?? "")
                 }
+            } else {
+                Logger.user.error("Failed to fetch user data")
             }
-        }.resume()
+        } catch {
+            Logger.user.error("Error fetching user data: \(error.localizedDescription)")
+        }
     }
     
     func patchUser() {
         // TODO: PATCH method
         guard let url = URL(string: Api.User.me) else {
-            self.errorMessage = "Invalid URL for users/me endpoint"
+            Logger.user.debug("Invalid URL for users/me endpoint")
             return
         }
         
