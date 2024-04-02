@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AlbumsScreen: View {
+  @EnvironmentObject var albumsFetcher: AlbumsFetcher
   @State private var addingAlbum = false
   @State private var addingFolder = false;
   @State private var title = ""
@@ -20,18 +21,18 @@ struct AlbumsScreen: View {
           MyAlbumsRow(
             rowTitle: "Mes albums",
             albums: [
-                Album(id: 12, name: "Vacances", pictureNames: ["turtlerock", "02"]),
-                Album(id: 13, name: "Montagne", pictureNames: ["silversalmoncreek", "02"]),
-                Album(id: 15, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 20, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 21, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 22, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 23, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 24, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 25, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
-                Album(id: 26, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"])],
+              Album(id: 12, name: "Vacances", pictureNames: ["turtlerock", "02"]),
+              Album(id: 13, name: "Montagne", pictureNames: ["silversalmoncreek", "02"]),
+              Album(id: 15, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 20, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 21, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 22, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 23, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 24, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 25, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"]),
+              Album(id: 26, name: "Canada 2023", pictureNames: ["twinlake", "02", "03"])],
             afficherToutButton: true)
-            
+          
           AlbumRow(rowTitle: "Albums partagés", albums: [Album(id: 14, name: "Friends", pictureNames: ["turtlerock", "02"])], afficherToutButton: true)
           AlbumRow(rowTitle: "Personnes, animaux et lieux", albums: [Album(id: 16, name: "Friends", pictureNames: ["icybay", "02"])], afficherToutButton: false)
         }
@@ -82,6 +83,18 @@ struct AlbumsScreen: View {
     } detail: {
       Text("Album list")
     }
+    .task {
+      do {
+          try await albumsFetcher.fetchAlbums()
+          if let albumsData = albumsFetcher.albumsData {
+              print("Albums: \(albumsData)")
+          } else {
+              print("Albums data is nil")
+          }
+      } catch {
+          print("Error fetching albums: \(error)")
+      }
+    }
   }
   
   func createAlbum(name: String) {
@@ -94,6 +107,10 @@ struct AlbumsScreen: View {
   }
 }
 
-#Preview {
-  AlbumsScreen()
+
+struct AlbumsScreen_Previews: PreviewProvider {
+  static var previews: some View {
+    AlbumsScreen()
+      .environmentObject(AlbumsFetcher())
+  }
 }

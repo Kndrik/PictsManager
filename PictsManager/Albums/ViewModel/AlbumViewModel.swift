@@ -8,6 +8,6 @@
 import Foundation
 
 
-func fetchAlbum() {
+func fetchAlbums() {
     // TODO: create and complete this method by using API Endpoint
 }
