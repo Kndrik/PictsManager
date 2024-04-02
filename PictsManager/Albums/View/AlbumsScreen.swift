@@ -23,7 +23,7 @@ struct AlbumsScreen: View {
               Text("Album \(album.title)")
             }
           } else {
-            Text("loading albums")
+            Text("Loading albums")
           }
           
           MyAlbumsRow(

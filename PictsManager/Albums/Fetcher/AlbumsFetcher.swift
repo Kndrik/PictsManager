@@ -27,8 +27,6 @@ class AlbumsFetcher: ObservableObject {
     let (data, response) = try await URLSession.shared.data(for: request)
     guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
     
-    print(String(data: data, encoding: .utf8))
-    
     Task { @MainActor in
       do {
         albumsData = try JSONDecoder().decode(AlbumCollection.self, from: data)
