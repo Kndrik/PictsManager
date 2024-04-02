@@ -24,7 +24,7 @@ struct AlbumAPI: Codable, Identifiable {
   var owner_id: String
   var pictures_ids: [String]
   var title: String
-  var viewers_id: [String]?
+  var viewers_ids: [String]
 }
 
 struct AlbumCollection: Codable {
