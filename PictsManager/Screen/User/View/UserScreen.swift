@@ -21,8 +21,6 @@ struct UserScreen: View {
 
     var body: some View {
         NavigationView {
-//            ScreenLinearColor(gradientTopColor: Color.red)
-            
             VStack {
                 
                 Spacer()
@@ -79,6 +77,12 @@ struct UserScreen: View {
             .toolbar {
                 ToolbarItem {
                     Button(action: {
+                        if isEditing {
+                            userViewModel.patchUser(
+                                username: isEditing ? editableUsername : nil,
+                                email: isEditing ? editableEmail : nil
+                            )
+                        }
                         isEditing.toggle()
                     }) {
                         Text(isEditing ? "Done" : "Edit")
@@ -95,7 +99,6 @@ struct UserScreen: View {
             }
             .onAppear {
                 Task {
-                    print("here")
                     await userViewModel.fetchUser()
                     isUserLoaded = true
                 }

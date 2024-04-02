@@ -151,11 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				2F9DD9092BA768B700567854 /* AlbumsScreen.swift */,
-				2F9DD90F2BA8795700567854 /* AlbumPreview.swift */,
 				22231A9F2BB322580061E028 /* AlbumsListView.swift */,
-				2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */,
-				2F9DD90B2BA84DCD00567854 /* AlbumRow.swift */,
-				2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */,
+				220C46E12BBC4158008FCAC8 /* Preview */,
+				220C46E02BBC413C008FCAC8 /* SubView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -166,6 +164,24 @@
 				220C46DB2BB8BC23008FCAC8 /* AlbumViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		220C46E02BBC413C008FCAC8 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */,
+				2F9DD90B2BA84DCD00567854 /* AlbumRow.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		220C46E12BBC4158008FCAC8 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				2F9DD90F2BA8795700567854 /* AlbumPreview.swift */,
+				2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */,
+			);
+			path = Preview;
 			sourceTree = "<group>";
 		};
 		226B369A2B9EECFC001BB288 /* Api */ = {
