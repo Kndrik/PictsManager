@@ -18,7 +18,7 @@ struct Search: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 List(searchResults, id: \.self) { country in
                     Text(country)
