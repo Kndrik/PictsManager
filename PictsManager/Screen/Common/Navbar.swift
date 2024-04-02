@@ -12,7 +12,7 @@ import SwiftUI
 struct Navbar: View {
     @EnvironmentObject var toastManager: ToastManager
     @State private var toast: Toast? = nil
-    @StateObject private var albumsFetcher = AlbumsFetcher()
+    @StateObject private var albumsFetcher = AlbumsViewModel()
     
     var body: some View {
         VStack {
