@@ -34,6 +34,7 @@ class UserViewModel: ObservableObject {
                 let decodedUser = try JSONDecoder().decode(UserResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.user = User(_id: decodedUser.id, email: decodedUser.email, username: decodedUser.username, token: UserSessionManager.shared.getToken() ?? "")
+
                 }
             } else {
                 Logger.user.error("Failed to fetch user data")
@@ -43,15 +44,58 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    func patchUser() {
+    func patchUser(username: String? = nil, email: String? = nil) {
         // TODO: PATCH method
         guard let url = URL(string: Api.User.me) else {
             Logger.user.debug("Invalid URL for users/me endpoint")
             return
         }
         
+        guard let token = UserSessionManager.shared.getToken() else {
+            Logger.user.error("User not authenticated")
+            return
+        }
+        
+        var requestBody = [String: String]()
+        if let username = username {
+            requestBody["username"] = username
+        }
+        if let email = email {
+            requestBody["email"] = email
+        }
+        
+        guard let encodedRequestBody = try? JSONEncoder().encode(requestBody) else {
+            return
+        }
+        
+//        let updatedUserData = User(_id: user?._id ?? "", email: user?.email ?? "", username: user?.username ?? "", token: token)
+//        guard let requestBody = try? JSONEncoder().encode(updatedUserData) else {
+//            Logger.user.error("Failed to encode new data")
+//            return
+//        }
+        
         var request =  URLRequest(url: url)
         request.httpMethod = "PATCH"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = /*requestBody*/ encodedRequestBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let _data = data, let httpResponse = response as? HTTPURLResponse, error == nil else {
+                Logger.auth.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                print("User: ", requestBody)
+                // TODO: success
+//                if let responseData = try? JSONDecoder().decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
+            } else {
+                Logger.user.error("error")
+            }
+        }.resume()
+        
+        
     }
 }
         
