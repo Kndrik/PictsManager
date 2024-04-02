@@ -18,6 +18,14 @@ struct AlbumsScreen: View {
     NavigationSplitView {
       VStack {
         List {
+          if let albumsData = albumsFetcher.albumsData {
+            ForEach(albumsData.albums) { album in
+              Text("Album \(album.title)")
+            }
+          } else {
+            Text("loading albums")
+          }
+          
           MyAlbumsRow(
             rowTitle: "Mes albums",
             albums: [
@@ -34,7 +42,7 @@ struct AlbumsScreen: View {
             afficherToutButton: true)
           
           AlbumRow(rowTitle: "Albums partagés", albums: [Album(id: 14, name: "Friends", pictureNames: ["turtlerock", "02"])], afficherToutButton: true)
-          AlbumRow(rowTitle: "Personnes, animaux et lieux", albums: [Album(id: 16, name: "Friends", pictureNames: ["icybay", "02"])], afficherToutButton: false)
+          //          AlbumRow(rowTitle: "Personnes, animaux et lieux", albums: [Album(id: 16, name: "Friends", pictureNames: ["icybay", "02"])], afficherToutButton: false)
         }
         .listStyle(.inset)
       }
@@ -85,14 +93,9 @@ struct AlbumsScreen: View {
     }
     .task {
       do {
-          try await albumsFetcher.fetchAlbums()
-          if let albumsData = albumsFetcher.albumsData {
-              print("Albums: \(albumsData)")
-          } else {
-              print("Albums data is nil")
-          }
+        try await albumsFetcher.fetchAlbums()
       } catch {
-          print("Error fetching albums: \(error)")
+        print("Error fetching albums: \(error)")
       }
     }
   }
