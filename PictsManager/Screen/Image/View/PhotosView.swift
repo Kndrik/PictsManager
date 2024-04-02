@@ -1,28 +1,36 @@
-//
-//  Photos.swift
-//  PictsManager
-//
-//  Created by Valentin Caure on 12/03/2024.
-//
-
 import SwiftUI
 
-struct Photos: View {
+struct PhotosView: View {
+
+    @StateObject var photosViewModel = PhotosViewModel()
+    @State var images: [UIImage] = []
 
     var body: some View {
 
         ZStack {
-                PhotosList()
+            PhotosList(images: $images)
             VStack{
                 Spacer()
                 PeriodSelector()
 
             }
-            .padding(.bottom, 10)
-        }
+                    .padding(.bottom, 10)
+        }.onAppear {
+                    Task {
+                        if images.isEmpty {
+                            await photosViewModel.getPicturesList()
+                            for picture in photosViewModel.pictures {
+                                print(picture.id)
+                                if let image = await photosViewModel.getLowPicturesById(pictureId: picture.id) {
+                                    images.append(image)
+                                }
+                            }
+                        }
+                    }
+                }
     }
 }
 
 #Preview {
-    Photos()
+    PhotosView()
 }
