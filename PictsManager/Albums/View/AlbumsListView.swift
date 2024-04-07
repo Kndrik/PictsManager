@@ -18,7 +18,7 @@ struct AlbumsListView: View {
               NavigationLink {
                 AlbumsScreen()
               } label: {
-                AlbumPreview(album: album)
+                AlbumPreview(album: album, isFavorite: false)
               }
               .buttonStyle(PlainButtonStyle())
             }

@@ -24,21 +24,9 @@ struct PhotosList: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 5) {
                 
-                ForEach(pictureURLs, id: \.self) { imageURL in
-                    let imageLoader = ImageLoader(url: imageURL)
-                    imageLoader.aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                        .clipped()
-                        .aspectRatio(1, contentMode: .fit)
-                        .onTapGesture {
-                            selectedImage = el
-                            isImageSelected = true
-                        }
-                }
-                    
-//                ForEach(1...99, id: \.self) { i in
-//
-//                    el.aspectRatio(contentMode: .fill)
+//                ForEach(pictureURLs, id: \.self) { imageURL in
+//                    let imageLoader = ImageLoader(url: imageURL)
+//                    imageLoader.aspectRatio(contentMode: .fill)
 //                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 //                        .clipped()
 //                        .aspectRatio(1, contentMode: .fit)
@@ -47,14 +35,26 @@ struct PhotosList: View {
 //                            isImageSelected = true
 //                        }
 //                }
+                    
+                ForEach(1...99, id: \.self) { i in
+
+                    el.aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                        .clipped()
+                        .aspectRatio(1, contentMode: .fit)
+                        .onTapGesture {
+                            selectedImage = el
+                            isImageSelected = true
+                        }
+                }
             }
             Color.clear.frame(height: 55)
-        }.fullScreenCover(isPresented: $isImageSelected) {
+        }
+        .fullScreenCover(isPresented: $isImageSelected) {
             Button("", systemImage: "chevron.left", action: close).font(.system(size: 30, weight: .semibold))
             if selectedImage != nil {
                 ImageDetail(image: selectedImage!)
             }
-            
         }
     }
 }

@@ -43,7 +43,7 @@ struct AlbumRow: View {
 //                AlbumsScreen()
 //                  PhotosList(pictureURLs: album.pictures)
               } label: {
-                AlbumPreview(album: album)
+                AlbumPreview(album: album, isFavorite: false)
               }
               .buttonStyle(PlainButtonStyle())
             }

@@ -42,7 +42,7 @@ struct MyAlbumsRow: View {
                 AlbumsScreen()
 //              PhotosList()
             } label: {
-              AlbumPreview(album: Album(id: 17, name: "Récentes", pictureNames: [""]))
+              AlbumPreview(album: Album(id: 17, name: "Récentes", pictureNames: [""]), isFavorite: false)
             }
             .buttonStyle(PlainButtonStyle())
               
@@ -52,7 +52,7 @@ struct MyAlbumsRow: View {
                     AlbumsScreen()
 //                    PhotosList()
                 } label: {
-                  AlbumPreview(album: album)
+                  AlbumPreview(album: album, isFavorite: false)
                 }
                 .buttonStyle(PlainButtonStyle())
               }
@@ -66,7 +66,7 @@ struct MyAlbumsRow: View {
                 AlbumsScreen()
 //              PhotosList()
             } label: {
-              FavoritesAlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]))
+                AlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]), isFavorite: true)
             }
             .buttonStyle(PlainButtonStyle())
               
@@ -76,7 +76,7 @@ struct MyAlbumsRow: View {
                     AlbumsScreen()
 //                  PhotosList()
                 } label: {
-                  AlbumPreview(album: album)
+                  AlbumPreview(album: album, isFavorite: false)
                 }
                 .buttonStyle(PlainButtonStyle())
               }
