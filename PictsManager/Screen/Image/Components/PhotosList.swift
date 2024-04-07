@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PhotosList: View {
-    @Binding var images: [UIImage]
-    @State private var selectedImage: UIImage?
+    @Binding var images: [Image]
+    @State private var selectedImage: Image?
     @State private var isImageSelected: Bool = false
 
     func close() -> Void {
@@ -24,51 +24,51 @@ struct PhotosList: View {
             LazyVGrid(columns: columns, spacing: 5) {
                 ForEach(images.indices, id: \.self) { index in
                     ImageLoader(image: images[index])
-                        .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                        .clipped()
-                        .aspectRatio(1, contentMode: .fit)
-                        .onTapGesture {
-                            selectedImage = images[index]
-                            isImageSelected = true
-                        }
+                            .aspectRatio(contentMode: .fill)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                            .clipped()
+                            .aspectRatio(1, contentMode: .fit)
+                            .onTapGesture {
+                                selectedImage = images[index]
+                                isImageSelected = true
+                            }
                 }
             }
             Color.clear.frame(height: 55)
         }.fullScreenCover(isPresented: $isImageSelected) {
-            VStack {
-                Button(action: {
-                    isImageSelected = false
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 30, weight: .semibold))
-                        .padding()
+                    VStack {
+                        Button(action: {
+                            isImageSelected = false
+                        }) {
+                            Image(systemName: "chevron.left")
+                                    .font(.system(size: 30, weight: .semibold))
+                                    .padding()
+                        }
+                        Spacer()
+                        if let selectedImage = selectedImage {
+                            ImageDetail(image: selectedImage)
+                        }
+                        Spacer()
+                    }
                 }
-                Spacer()
-                if let selectedImage = selectedImage {
-                    ImageDetail(image: selectedImage)
-                }
-                Spacer()
-            }
-        }
     }
 }
 
 struct ImageLoader: View {
-    var image: UIImage
+    var image: Image
     var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .rotationEffect(.degrees(90))
+        image
+                .resizable()
+                .rotationEffect(.degrees(90))
     }
 }
 
 struct ImageDetail: View {
-    var image: UIImage
+    var image: Image
     var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .rotationEffect(.degrees(90))
+        image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .rotationEffect(.degrees(90))
     }
 }

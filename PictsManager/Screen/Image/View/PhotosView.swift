@@ -1,9 +1,16 @@
+//
+//  PhotosList.swift
+//  PictsManager
+//
+//  Created by Valentin Caure on 12/03/2024.
+//
+
 import SwiftUI
 
 struct PhotosView: View {
 
     @StateObject var photosViewModel = PhotosViewModel()
-    @State var images: [UIImage] = []
+    @State var images: [Image] = []
 
     var body: some View {
 

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 class PhotosViewModel: ObservableObject {
 
@@ -33,7 +33,7 @@ class PhotosViewModel: ObservableObject {
             }
             return
         }
-        
+
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -54,8 +54,8 @@ class PhotosViewModel: ObservableObject {
             }
         }
     }
-    
-    func getLowPicturesById(pictureId: String) async -> UIImage? {
+
+    func getLowPicturesById(pictureId: String) async -> Image? {
         print(Api.Auth.me)
         guard let url = URL(string: Api.Picture.pictureList + pictureId + "/low") else {
             DispatchQueue.main.async {
@@ -85,8 +85,8 @@ class PhotosViewModel: ObservableObject {
                 return nil
             }
 
-            if let image = UIImage(data: data) {
-                return image
+            if let uiImage = UIImage(data: data) {
+                return Image(uiImage: uiImage)
             } else {
                 DispatchQueue.main.async {
                     self.errorMessage = "Failed to convert data to image"
