@@ -1,11 +1,11 @@
 //
-//  Photos.swift
+//  Photo.swift
 //  PictsManager
 //
 //  Created by Stevens on 02/04/2024.
 //
 
-struct Picture: Codable, Identifiable {
+struct Photo: Codable, Identifiable {
     let date: String
     let filename: String
     let id: String

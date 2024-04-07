@@ -58,8 +58,8 @@ struct ImageLoader: View {
     var image: Image
     var body: some View {
         image
-                .resizable()
-                .rotationEffect(.degrees(90))
+            .resizable()
+            .rotationEffect(.degrees(90))
     }
 }
 
@@ -67,8 +67,8 @@ struct ImageDetail: View {
     var image: Image
     var body: some View {
         image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .rotationEffect(.degrees(90))
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .rotationEffect(.degrees(90))
     }
 }

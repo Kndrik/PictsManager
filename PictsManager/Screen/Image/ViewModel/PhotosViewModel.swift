@@ -11,7 +11,7 @@ import SwiftUI
 class PhotosViewModel: ObservableObject {
 
     @Published var errorMessage: String? = ""
-    @Published var pictures = [Picture]()
+    @Published var pictures = [Photo]()
 
     func getPicturesList() async {
         print(Api.Auth.me)
@@ -44,7 +44,7 @@ class PhotosViewModel: ObservableObject {
                 return
             }
 
-            let picturesResponse = try JSONDecoder().decode([String: [Picture]].self, from: data)
+            let picturesResponse = try JSONDecoder().decode([String: [Photo]].self, from: data)
             DispatchQueue.main.async {
                 self.pictures = picturesResponse["pictures"] ?? []
             }
