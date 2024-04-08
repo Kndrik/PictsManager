@@ -10,28 +10,20 @@ import SwiftUI
 struct PhotosView: View {
 
     @StateObject var photosViewModel = PhotosViewModel()
-    @State var images: [Image] = []
 
     var body: some View {
 
         ZStack {
-            PhotosList(images: $images)
+            PhotosList(photos: $photosViewModel.pictures)
             VStack{
                 Spacer()
                 PeriodSelector()
-
             }
                     .padding(.bottom, 10)
         }.onAppear {
                     Task {
-                        if images.isEmpty {
+                        if photosViewModel.pictures.isEmpty {
                             await photosViewModel.getPicturesList()
-                            for picture in photosViewModel.pictures {
-                                print(picture.id)
-                                if let image = await photosViewModel.getLowPicturesById(pictureId: picture.id) {
-                                    images.append(image)
-                                }
-                            }
                         }
                     }
                 }

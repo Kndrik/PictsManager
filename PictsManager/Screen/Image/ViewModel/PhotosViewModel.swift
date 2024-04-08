@@ -13,6 +13,12 @@ class PhotosViewModel: ObservableObject {
     @Published var errorMessage: String? = ""
     @Published var pictures = [Photo]()
 
+    func updatePhotoWithImage(id: String, imageData: Data)  async {
+        if let index = pictures.firstIndex(where: { $0.id == id }) {
+            pictures[index].imageData = imageData
+        }
+    }
+
     func getPicturesList() async {
         print(Api.Auth.me)
         guard let url = URL(string: Api.Picture.pictureList) else {
@@ -43,19 +49,23 @@ class PhotosViewModel: ObservableObject {
                 }
                 return
             }
-
             let picturesResponse = try JSONDecoder().decode([String: [Photo]].self, from: data)
-            DispatchQueue.main.async {
-                self.pictures = picturesResponse["pictures"] ?? []
+               await MainActor.run {
+                   self.pictures = picturesResponse["pictures"] ?? []
+               }
+            for picture in pictures {
+                if let data = await getLowPicturesById(pictureId: picture.id) {
+                   await updatePhotoWithImage(id: picture.id, imageData: data)
+                }
             }
         } catch {
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.errorMessage = error.localizedDescription
             }
         }
     }
 
-    func getLowPicturesById(pictureId: String) async -> Image? {
+    func getLowPicturesById(pictureId: String) async -> Data? {
         print(Api.Auth.me)
         guard let url = URL(string: Api.Picture.pictureList + pictureId + "/low") else {
             DispatchQueue.main.async {
@@ -85,16 +95,9 @@ class PhotosViewModel: ObservableObject {
                 return nil
             }
 
-            if let uiImage = UIImage(data: data) {
-                return Image(uiImage: uiImage)
-            } else {
-                DispatchQueue.main.async {
-                    self.errorMessage = "Failed to convert data to image"
-                }
-                return nil
-            }
+            return data
         } catch {
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.errorMessage = error.localizedDescription
             }
             return nil
