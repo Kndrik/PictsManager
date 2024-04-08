@@ -60,12 +60,17 @@ struct ImageLoader: View {
 
 struct ImageDetail: View {
     var photo: Photo
+    @StateObject var imageDetailsViewModel = ImageDetailsViewModel()
     var body: some View {
         VStack {
-            photo.image?
+            imageDetailsViewModel.image?
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .rotationEffect(.degrees(90))
+        }.onAppear {
+            Task {
+                await imageDetailsViewModel.getPictureById(pictureId: photo.id)
+            }
         }
     }
 }
