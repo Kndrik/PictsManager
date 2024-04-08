@@ -15,12 +15,13 @@ class PhotosViewModel: ObservableObject {
 
     func updatePhotoWithImage(id: String, imageData: Data)  async {
         if let index = pictures.firstIndex(where: { $0.id == id }) {
-            pictures[index].imageData = imageData
+            DispatchQueue.main.async {
+                self.pictures[index].imageData = imageData
+            }
         }
     }
 
     func getPicturesList() async {
-        print(Api.Auth.me)
         guard let url = URL(string: Api.Picture.pictureList) else {
             DispatchQueue.main.async {
                 self.errorMessage = "Invalid URL for pictures endpoint"
@@ -66,7 +67,6 @@ class PhotosViewModel: ObservableObject {
     }
 
     func getLowPicturesById(pictureId: String) async -> Data? {
-        print(Api.Auth.me)
         guard let url = URL(string: Api.Picture.pictureList + pictureId + "/low") else {
             DispatchQueue.main.async {
                 self.errorMessage = "Invalid URL for pictures endpoint"
