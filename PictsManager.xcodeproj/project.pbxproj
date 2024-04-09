@@ -32,6 +32,7 @@
 		22D8B6322B98F06100734A99 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8B6312B98F06100734A99 /* LoginScreen.swift */; };
 		22D8B6342B98F1C300734A99 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8B6332B98F1C300734A99 /* AuthViewModel.swift */; };
 		22DCFAAF2BB085740019A59F /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DCFAAE2BB085740019A59F /* UserResponse.swift */; };
+		22EEC3EB2BC57D5200365B20 /* PeriodConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEC3EA2BC57D5200365B20 /* PeriodConstants.swift */; };
 		2F15DE872B96075400D74795 /* PictsManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15DE862B96075400D74795 /* PictsManagerApp.swift */; };
 		2F15DE8B2B96075500D74795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F15DE8A2B96075500D74795 /* Assets.xcassets */; };
 		2F15DE8E2B96075500D74795 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F15DE8D2B96075500D74795 /* Preview Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		22D8B6312B98F06100734A99 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		22D8B6332B98F1C300734A99 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		22DCFAAE2BB085740019A59F /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		22EEC3EA2BC57D5200365B20 /* PeriodConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodConstants.swift; sourceTree = "<group>"; };
 		2F15DE832B96075400D74795 /* PictsManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictsManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F15DE862B96075400D74795 /* PictsManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictsManagerApp.swift; sourceTree = "<group>"; };
 		2F15DE8A2B96075500D74795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				1A4A09F72BA0CF630006D27F /* PhotosList.swift */,
 				1A4A09F92BA0EDF30006D27F /* PeriodSelector.swift */,
 				34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */,
+				22EEC3EA2BC57D5200365B20 /* PeriodConstants.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -503,7 +506,6 @@
 				2209B00D2BA77B3100036F36 /* UserScreen.swift in Sources */,
 				34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */,
 				34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */,
-				1A4A09ED2BA063E50006D27F /* AlbumsView.swift in Sources */,
 				22BB3B692BA996A000A94254 /* ToastManager.swift in Sources */,
 				2F9DD9102BA8795700567854 /* AlbumPreview.swift in Sources */,
 				2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */,
@@ -521,6 +523,7 @@
 				34CAE0F82BA9C22B00381E39 /* CameraScreen.swift in Sources */,
 				22231AA02BB322580061E028 /* AlbumsListView.swift in Sources */,
 				22BB3B5E2BA89C8A00A94254 /* Toast.swift in Sources */,
+				22EEC3EB2BC57D5200365B20 /* PeriodConstants.swift in Sources */,
 				22946C582BA3A0CA0052B612 /* AuthScreen.swift in Sources */,
 				2F9DD9162BA9A29600567854 /* FavoritesAlbumPreview.swift in Sources */,
 				22D8B6342B98F1C300734A99 /* AuthViewModel.swift in Sources */,
