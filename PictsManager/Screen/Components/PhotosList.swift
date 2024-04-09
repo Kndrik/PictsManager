@@ -9,42 +9,28 @@ import SwiftUI
 
 struct PhotosList: View {
     @Binding var photos: [Photo]
+    var photoListName: String
     @State private var selectedPhoto: Photo?
-    @State private var isPhotoSelected: Bool = false
 
     var body: some View {
         let columns = Array(repeating: GridItem(.adaptive(minimum: 100, maximum: .infinity), spacing: 5), count: 3)
 
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 5) {
-                ForEach(photos.indices, id: \.self) { index in
-                    ImageLoader(photo: photos[index])
-                        .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                        .clipped()
-                        .aspectRatio(1, contentMode: .fit)
-                        .onTapGesture {
-                            selectedPhoto = photos[index]
-                            isPhotoSelected = true
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 5) {
+                    ForEach(photos.indices, id: \.self) { index in
+                        NavigationLink(destination: ImageDetail(photo: photos[index])) {
+                            ImageLoader(photo: photos[index])
+                                .aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                .clipped()
+                                .aspectRatio(1, contentMode: .fit)
                         }
+                    }
                 }
+                Color.clear.frame(height: 55)
             }
-            Color.clear.frame(height: 55)
-        }.fullScreenCover(isPresented: $isPhotoSelected) {
-            VStack {
-                Button(action: {
-                    isPhotoSelected = false
-                }) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 30, weight: .semibold))
-                        .padding()
-                }
-                Spacer()
-                if let selectedPhoto = selectedPhoto {
-                    ImageDetail(photo: selectedPhoto)
-                }
-                Spacer()
-            }
+            .navigationTitle(photoListName)
         }
     }
 }
@@ -61,16 +47,50 @@ struct ImageLoader: View {
 struct ImageDetail: View {
     var photo: Photo
     @StateObject var imageDetailsViewModel = ImageDetailsViewModel()
+    @State private var isLiked = false
+
     var body: some View {
-        VStack {
+        ZStack {
             imageDetailsViewModel.image?
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .rotationEffect(.degrees(90))
-        }.onAppear {
-            Task {
-                await imageDetailsViewModel.getPictureById(pictureId: photo.id)
+                    .resizable()
+                    .scaledToFit()
+                    .rotationEffect(.degrees(90))
+
+            VStack {
+                Spacer()
+                HStack {
+                    Button(action: {
+                        //shareImage()
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                                .font(.system(size: 30, weight: .semibold))
+                                .padding()
+                    }
+
+                    Button(action: {
+                        isLiked.toggle()
+                    }) {
+                        Image(systemName: isLiked ? "heart.fill" : "heart")
+                                .font(.system(size: 30, weight: .semibold))
+                                .padding()
+                                .foregroundColor(isLiked ? .red : .gray)
+                    }
+                    Button(action: {
+                        // deleteImage()
+                    }) {
+                        Image(systemName: "trash")
+                                .font(.system(size: 30, weight: .semibold))
+                                .padding()
+                                .foregroundColor(.red)
+                    }
+                }
             }
         }
+                .onAppear {
+                    Task {
+                        await imageDetailsViewModel.getPictureById(pictureId: photo.id)
+                    }
+                }
     }
+
 }
