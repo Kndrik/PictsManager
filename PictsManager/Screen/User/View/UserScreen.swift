@@ -69,7 +69,6 @@ struct UserScreen: View {
                 
                 
             }
-            .toastView(toast: $toastManager.toast)
             .padding()
             .toolbar {
                 ToolbarItem {
