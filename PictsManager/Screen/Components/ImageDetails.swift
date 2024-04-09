@@ -14,6 +14,8 @@ struct ImageDetails: View {
     @State private var isLiked = false
     @Environment(\.presentationMode) var presentationMode
     @State private var showingDeleteAlert = false
+    @State private var showingPopover = false
+    @State private var email = ""
 
     var body: some View {
         ZStack {
@@ -26,7 +28,7 @@ struct ImageDetails: View {
                 Spacer()
                 HStack {
                     Button(action: {
-                        //shareImage()
+                        showingPopover = true
                     }) {
                         Image(systemName: "square.and.arrow.up")
                                 .font(.system(size: 30, weight: .semibold))
@@ -55,6 +57,25 @@ struct ImageDetails: View {
         }
         .alert(isPresented: $showingDeleteAlert) {
             deleteConfirmationAlert()
+        }
+        .popover(isPresented: $showingPopover) {
+            VStack {
+                Text("Share with:")
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Button(action: {
+                    Task {
+                        await imageDetailsViewModel.sharePicture(email: email, pictureId: photo.id)
+                        email = ""
+                    }
+                    showingPopover = false
+                }) {
+                    Text("Share")
+                }
+                .padding()
+            }
+            .frame(alignment: .top)
         }
         .onAppear {
             Task {

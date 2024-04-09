@@ -46,6 +46,7 @@
 		34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AB2BBC012E00C70075 /* Photo.swift */; };
 		34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */; };
 		34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AF2BC5846900C70075 /* ImageDetails.swift */; };
+		34DAE5B22BC5E38300C70075 /* ShareForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5B12BC5E38300C70075 /* ShareForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		34DAE5AB2BBC012E00C70075 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsViewModel.swift; sourceTree = "<group>"; };
 		34DAE5AF2BC5846900C70075 /* ImageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetails.swift; sourceTree = "<group>"; };
+		34DAE5B12BC5E38300C70075 /* ShareForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +327,7 @@
 			children = (
 				34CAE0D22BA05D5800381E39 /* LoginForm.swift */,
 				34CAE0D42BA05DA900381E39 /* RegisterForm.swift */,
+				34DAE5B12BC5E38300C70075 /* ShareForm.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				2F15DE872B96075400D74795 /* PictsManagerApp.swift in Sources */,
 				1A4A09EF2BA064630006D27F /* SearchView.swift in Sources */,
 				2209B00D2BA77B3100036F36 /* UserScreen.swift in Sources */,
+				34DAE5B22BC5E38300C70075 /* ShareForm.swift in Sources */,
 				34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */,
 				34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */,
 				34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */,
