@@ -13,8 +13,7 @@ struct PictsManagerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(toastManager)
+            ContentView().environmentObject(toastManager)
         }
     }
 }
