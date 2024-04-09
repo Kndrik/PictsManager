@@ -19,7 +19,7 @@ struct PhotosList: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(photos.indices, id: \.self) { index in
-                        NavigationLink(destination: ImageDetail(photo: photos[index])) {
+                        NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos)) {
                             ImageLoader(photo: photos[index])
                                 .aspectRatio(contentMode: .fill)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -44,53 +44,3 @@ struct ImageLoader: View {
     }
 }
 
-struct ImageDetail: View {
-    var photo: Photo
-    @StateObject var imageDetailsViewModel = ImageDetailsViewModel()
-    @State private var isLiked = false
-
-    var body: some View {
-        ZStack {
-            imageDetailsViewModel.image?
-                    .resizable()
-                    .scaledToFit()
-                    .rotationEffect(.degrees(90))
-
-            VStack {
-                Spacer()
-                HStack {
-                    Button(action: {
-                        //shareImage()
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                                .font(.system(size: 30, weight: .semibold))
-                                .padding()
-                    }
-
-                    Button(action: {
-                        isLiked.toggle()
-                    }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                                .font(.system(size: 30, weight: .semibold))
-                                .padding()
-                                .foregroundColor(isLiked ? .red : .gray)
-                    }
-                    Button(action: {
-                        // deleteImage()
-                    }) {
-                        Image(systemName: "trash")
-                                .font(.system(size: 30, weight: .semibold))
-                                .padding()
-                                .foregroundColor(.red)
-                    }
-                }
-            }
-        }
-                .onAppear {
-                    Task {
-                        await imageDetailsViewModel.getPictureById(pictureId: photo.id)
-                    }
-                }
-    }
-
-}
