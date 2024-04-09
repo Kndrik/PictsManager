@@ -114,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				34DAE5A82BBBFEC300C70075 /* ViewModel */,
-				1A4A09F52BA0CF4E0006D27F /* Components */,
 				2209B00F2BA77D5900036F36 /* View */,
 			);
 			path = Image;
@@ -185,6 +184,7 @@
 		22BB3B542BA894F900A94254 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				1A4A09F52BA0CF4E0006D27F /* Components */,
 				34CAE0E62BA9A96B00381E39 /* Camera */,
 				22BB3B502BA79C8600A94254 /* Common */,
 				22D8B6302B98EFF200734A99 /* Auth */,
