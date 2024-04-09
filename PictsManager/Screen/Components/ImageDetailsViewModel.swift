@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import OSLog
 
 class ImageDetailsViewModel: ObservableObject {
 
@@ -15,7 +16,7 @@ class ImageDetailsViewModel: ObservableObject {
 
     func getPictureById(pictureId: String) async {
         guard let url = URL(string: Api.Picture.pictureList + pictureId) else {
-            await updateErrorMessage("Invalid URL for pictures endpoint")
+            Logger.imageDetails.error("Invalid URL for pictures endpoint")
             return
         }
 
@@ -25,14 +26,14 @@ class ImageDetailsViewModel: ObservableObject {
         if let token = UserSessionManager.shared.getToken() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else {
-            await updateErrorMessage("User not authenticated")
+            Logger.imageDetails.error("User not authenticated")
             return
         }
 
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                await updateErrorMessage("Failed to fetch pictures data")
+                Logger.imageDetails.error("Failed to fetch pictures data")
                 return
             }
 
@@ -42,13 +43,7 @@ class ImageDetailsViewModel: ObservableObject {
                 }
             }
         } catch {
-            await updateErrorMessage(error.localizedDescription)
-        }
-    }
-
-    private func updateErrorMessage(_ message: String) async {
-        await MainActor.run {
-            self.errorMessage = message
+            Logger.imageDetails.error("\(error.localizedDescription)")
         }
     }
 }
