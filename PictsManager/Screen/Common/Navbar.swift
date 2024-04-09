@@ -17,7 +17,7 @@ struct Navbar: View {
     var body: some View {
         VStack {
             TabView {
-                PhotosView()
+                PhotosView(title: PeriodConstants.all)
                     .tabItem() {
                         Image(systemName: "photo.fill.on.rectangle.fill")
                         Text("Photothèque")

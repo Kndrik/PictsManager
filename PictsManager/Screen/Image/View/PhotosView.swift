@@ -10,28 +10,56 @@ import SwiftUI
 struct PhotosView: View {
 
     @StateObject var photosViewModel = PhotosViewModel()
+    @State private var selectedPeriodIndex = 3
+    let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
+
+    let title: String
 
     var body: some View {
-
         ZStack {
-
-            PhotosList(photos: $photosViewModel.pictures)
-
-            VStack{
-                Spacer()
-                PeriodSelector()
-            }
-                    .padding(.bottom, 10)
-        }.onAppear {
-                    Task {
-                        if photosViewModel.pictures.isEmpty {
-                            await photosViewModel.getPicturesList()
-                        }
+            VStack {
+                HStack {
+                    Text(periodTitles[selectedPeriodIndex])
+                        .bold()
+                        .font(.title2)
+                    Spacer()
+                    
+                    Button(action: {
+                        print("tapped")
+                    }) {
+                        Text("Sélectionner")
+                            .bold()
+                            .font(.caption)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 5)
+                            .background(.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(25)
                     }
                 }
+                .padding(.leading, 10)
+                .padding(.trailing, 10)
+                Spacer()
+            }
+            
+            PhotosList(photos: $photosViewModel.pictures)
+            
+            VStack {
+                Spacer()
+                PeriodSelector(selectedItem: $selectedPeriodIndex)
+            }
+            .padding(.bottom, 10)
+        }
+        .onAppear {
+            Task {
+                if photosViewModel.pictures.isEmpty {
+                    await photosViewModel.getPicturesList()
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    PhotosView()
+    PhotosView(title: PeriodConstants.all)
 }
