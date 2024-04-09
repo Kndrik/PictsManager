@@ -22,7 +22,7 @@ struct Api {
     }
     
     struct Picture {
-        static let pictureList = endpoint(path: "/pictures")
+        static let pictureList = endpoint(path: "/pictures/")
         static let uploadPicture = endpoint(path: "/pictures/upload")
     }
 }
