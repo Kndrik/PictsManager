@@ -14,7 +14,7 @@ struct PhotosView: View {
     var body: some View {
 
         ZStack {
-            PhotosList(photos: $photosViewModel.pictures)
+            PhotosList(photos: $photosViewModel.pictures, photoListName: "Photos")
             VStack{
                 Spacer()
                 PeriodSelector()

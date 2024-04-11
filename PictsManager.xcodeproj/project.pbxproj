@@ -45,6 +45,8 @@
 		34DAE5AA2BBBFEDE00C70075 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5A92BBBFEDE00C70075 /* PhotosViewModel.swift */; };
 		34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AB2BBC012E00C70075 /* Photo.swift */; };
 		34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */; };
+		34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AF2BC5846900C70075 /* ImageDetails.swift */; };
+		34DAE5B22BC5E38300C70075 /* ShareForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5B12BC5E38300C70075 /* ShareForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		34DAE5A92BBBFEDE00C70075 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		34DAE5AB2BBC012E00C70075 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsViewModel.swift; sourceTree = "<group>"; };
+		34DAE5AF2BC5846900C70075 /* ImageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetails.swift; sourceTree = "<group>"; };
+		34DAE5B12BC5E38300C70075 /* ShareForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 				1A4A09F72BA0CF630006D27F /* PhotosList.swift */,
 				1A4A09F92BA0EDF30006D27F /* PeriodSelector.swift */,
 				34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */,
+				34DAE5AF2BC5846900C70075 /* ImageDetails.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			children = (
 				34CAE0D22BA05D5800381E39 /* LoginForm.swift */,
 				34CAE0D42BA05DA900381E39 /* RegisterForm.swift */,
+				34DAE5B12BC5E38300C70075 /* ShareForm.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -428,8 +434,10 @@
 				2F15DE872B96075400D74795 /* PictsManagerApp.swift in Sources */,
 				1A4A09EF2BA064630006D27F /* SearchView.swift in Sources */,
 				2209B00D2BA77B3100036F36 /* UserScreen.swift in Sources */,
+				34DAE5B22BC5E38300C70075 /* ShareForm.swift in Sources */,
 				34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */,
 				34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */,
+				34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */,
 				1A4A09ED2BA063E50006D27F /* AlbumsView.swift in Sources */,
 				22BB3B692BA996A000A94254 /* ToastManager.swift in Sources */,
 				226B369C2B9EED44001BB288 /* Api.swift in Sources */,
@@ -509,7 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -566,7 +574,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
