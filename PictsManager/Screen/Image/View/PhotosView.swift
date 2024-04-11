@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PhotosView: View {
-
     @StateObject var photosViewModel = PhotosViewModel()
     @State private var selectedPeriodIndex = 3
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
@@ -24,17 +23,30 @@ struct PhotosView: View {
                         .font(.title2)
                     Spacer()
                     
-                    Button(action: {
-                        print("tapped")
-                    }) {
-                        Text("Sélectionner")
-                            .bold()
-                            .font(.caption)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 5)
-                            .background(.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(25)
+                    HStack {
+                        Button(action: {
+                            print("tapped")
+                        }) {
+                            Text("Sélectionner")
+                                .bold()
+                                .font(.caption)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 5)
+                                .background(.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(25)
+                        }
+                        
+                        Button {
+                            print("tapped")
+                        } label: {
+                            Image(systemName: "ellipsis.circle.fill")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                        }
+                        .background(.white)
+                        .foregroundColor(.gray)
+                        .cornerRadius(25)
                     }
                 }
                 .padding(.leading, 10)
