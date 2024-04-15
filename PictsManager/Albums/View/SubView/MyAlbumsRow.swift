@@ -78,7 +78,7 @@ struct MyAlbumsRow: View {
                 AlbumsScreen()
 //              PhotosList()
             } label: {
-                AlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]), isFavorite: true)
+              AlbumPreview(album: Album(id: "124124JHF8234", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: allPictures_id, title: "Récent", viewers_ids: ["eee"]), isFavorite: true)
             }
             .buttonStyle(PlainButtonStyle())
               
@@ -103,11 +103,6 @@ struct MyAlbumsRow: View {
     }
     .padding(.bottom, 30)
     .listRowInsets(EdgeInsets())
-    .task {
-        ForEach(albums) { album in
-//          allPictures_id.append(contentsOf: album.pictures_ids)
-        }
-    }
   }
 }
 

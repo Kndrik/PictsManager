@@ -52,5 +52,5 @@ struct AlbumPreview: View {
     "66129b67fea686857a14f12c",
     "6611b3b53a0ad873ade492d6",
     "6611b3b83a0ad873ade492d7"
-  ], title: "Parfums", viewers_ids: []))
+  ], title: "Parfums", viewers_ids: []), isFavorite: true)
 }

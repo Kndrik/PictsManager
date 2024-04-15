@@ -12,7 +12,7 @@ import SwiftUI
 struct Navbar: View {
     @EnvironmentObject var toastManager: ToastManager
     @State private var toast: Toast? = nil
-    @StateObject private var albumsFetcher = AlbumsViewModel()
+    @StateObject private var albumsViewModel = AlbumsViewModel()
     
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct Navbar: View {
                         Image(systemName: "rectangle.stack.fill")
                         Text("Albums")
                     }
-                    .environmentObject(albumsFetcher)
+                    .environmentObject(albumsViewModel)
                 
                 CameraScreen()
                     .tabItem {
