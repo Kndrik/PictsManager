@@ -12,7 +12,8 @@ struct MyAlbumsRow: View {
   var rowTitle: String
   var albums: [Album]
   var afficherToutButton: Bool
-  @State private var allPictures_id = [""]
+  @State private var allPictures_ids = [""]
+  @State private var favorites_ids = [""]
   
   init(rowTitle: String, albums: [Album], afficherToutButton: Bool) {
     self.albums = albums
@@ -21,9 +22,9 @@ struct MyAlbumsRow: View {
     
     var combinedPictureIds = [""]
     for album in albums {
-        combinedPictureIds.append(contentsOf: album.pictures_ids)
+      combinedPictureIds.append(contentsOf: album.pictures_ids)
     }
-    self._allPictures_id = State(initialValue: combinedPictureIds)
+    self._allPictures_ids = State(initialValue: combinedPictureIds)
   }
   
   var body: some View {
@@ -54,15 +55,14 @@ struct MyAlbumsRow: View {
             NavigationLink {
                 AlbumsScreen()
             } label: {
-              AlbumPreview(album: Album(id: "124124JHF8234", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: allPictures_id, title: "Récent", viewers_ids: ["eee"]), isFavorite: false)
+              AlbumPreview(album: Album(id: "124124JHF8234", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: allPictures_ids, title: "Récent", viewers_ids: ["eee"]), isFavorite: false)
             }
             .buttonStyle(PlainButtonStyle())
               
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 == 0) {
                 NavigationLink {
-                    AlbumsScreen()
-//                    PhotosList()
+                  PhotosView(album: album)
                 } label: {
                   AlbumPreview(album: album, isFavorite: false)
                 }
@@ -78,15 +78,16 @@ struct MyAlbumsRow: View {
                 AlbumsScreen()
 //              PhotosList()
             } label: {
-              AlbumPreview(album: Album(id: "124124JHF8234", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: allPictures_id, title: "Récent", viewers_ids: ["eee"]), isFavorite: true)
+              AlbumPreview(album: Album(id: "124124JHF8235", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: favorites_ids, title: "Favorites", viewers_ids: ["eee"]), isFavorite: true)
             }
             .buttonStyle(PlainButtonStyle())
               
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 != 0) {
                 NavigationLink {
-                    AlbumsScreen()
+//                    AlbumsScreen()
 //                  PhotosList()
+                  PhotosView(album: album)
                 } label: {
                   AlbumPreview(album: album, isFavorite: false)
                 }

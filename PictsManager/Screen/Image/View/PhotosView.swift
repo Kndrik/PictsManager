@@ -12,16 +12,21 @@ struct PhotosView: View {
     @State var album: Album?
     @State private var selectedPeriodIndex = 3
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
-    let title: String
 
     var body: some View {
         ZStack {
             VStack {
                 HStack {
+                  if let album = album {
+                    Text(album.title)
+                      .bold()
+                      .font(.title2)
+                  } else {
                     Text(periodTitles[selectedPeriodIndex])
-                        .bold()
-                        .font(.title2)
-                    Spacer()
+                      .bold()
+                      .font(.title2)
+                  }
+                  Spacer()
                     
                     HStack {
                         Button(action: {
@@ -73,5 +78,5 @@ struct PhotosView: View {
 }
 
 #Preview {
-    PhotosView(title: PeriodConstants.all)
+    PhotosView()
 }

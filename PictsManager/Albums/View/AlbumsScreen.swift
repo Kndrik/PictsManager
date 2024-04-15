@@ -79,7 +79,7 @@ struct AlbumsScreen: View {
         try await albumsViewModel.fetchAlbums()
       } catch {
         print("Error fetching albums: \(error)")
-      } 
+      }
     }
   }
 }
