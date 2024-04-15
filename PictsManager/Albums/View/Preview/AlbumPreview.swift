@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AlbumPreview: View {
   var album: Album
+  var isFavorite: Bool
   @StateObject private var imageFetcher = ImageFetcher()
   
   var body: some View {
@@ -19,6 +20,13 @@ struct AlbumPreview: View {
           .resizable()
           .frame(width: 170, height: 170)
           .cornerRadius(3)
+          .overlay(alignment: .bottomLeading) {
+            isFavorite ?
+                Image(systemName: "heart.fill")
+                  .foregroundStyle(Color.white)
+                  .padding(5)
+            : nil
+          }
         Text(album.title)
           .padding(.bottom, -8)
         Text(String(album.pictures_ids.count))

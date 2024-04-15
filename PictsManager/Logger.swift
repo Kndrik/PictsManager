@@ -13,4 +13,6 @@ extension Logger {
     static let auth = Logger(subsystem: subsystem, category: String(describing: AuthViewModel.self))
     static let user = Logger(subsystem: subsystem, category: String(describing: UserViewModel.self))
     static let camera = Logger(subsystem: subsystem, category: String(describing: CameraViewModel.self))
+    static let album = Logger(subsystem: subsystem, category: String(describing: AlbumsViewModel.self))
+    static let imageDetails = Logger(subsystem: subsystem, category: String(describing: ImageDetailsViewModel.self))
 }

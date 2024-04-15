@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct PeriodSelector: View {
-    @State private var selectedItem = 3
+    @Binding var selectedItem: Int
     @State private var itemWidths: [CGFloat] = Array(repeating: 0, count: 4)
 
-    let items = ["Années", "Mois", "Jours", "Toutes les photos"]
+    let items = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
 
     func getSelectedItem() -> Int {
         return selectedItem
@@ -81,6 +81,10 @@ struct WidthPreferenceKey: PreferenceKey {
     }
 }
 
-#Preview {
-    PeriodSelector()
+struct PeriodSelector_Previews: PreviewProvider {
+    @State static var selectedItem = 3
+
+    static var previews: some View {
+        PeriodSelector(selectedItem: $selectedItem)
+    }
 }

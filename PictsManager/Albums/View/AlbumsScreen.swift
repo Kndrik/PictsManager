@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AlbumsScreen: View {
-  @EnvironmentObject var albumsFetcher: AlbumsFetcher
+  @EnvironmentObject var albumsViewModel: AlbumsViewModel
   @State private var addingAlbum = false
   @State private var addingFolder = false;
   @State private var title = ""
@@ -18,7 +18,7 @@ struct AlbumsScreen: View {
     NavigationSplitView {
       VStack {
         List {
-          if let albumsData = albumsFetcher.albumsData {
+          if let albumsData = albumsViewModel.albumsData {
             MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, afficherToutButton: true)
           } else {
             Text("Loading albums")
@@ -43,7 +43,7 @@ struct AlbumsScreen: View {
               Text("Annuler")
             }
             Button {
-              createAlbum(name: title)
+//                albumsViewModel.createAlbum(name: title)
             } label: {
               Text("Enregistrer")
             }
@@ -60,7 +60,7 @@ struct AlbumsScreen: View {
               Text("Annuler")
             }
             Button {
-              createFolder(name: folderName)
+//                albumsViewModel.createFolder(name: folderName)
             } label: {
               Text("Enregistrer")
             }
@@ -76,20 +76,11 @@ struct AlbumsScreen: View {
     }
     .task {
       do {
-        try await albumsFetcher.fetchAlbums()
+        try await albumsViewModel.fetchAlbums()
       } catch {
         print("Error fetching albums: \(error)")
       } 
     }
-  }
-  
-  func createAlbum(name: String) {
-    // Call API to create the album
-    print("\(name)")
-  }
-  
-  func createFolder(name: String) {
-    print("Create folder \(name)")
   }
 }
 
@@ -97,6 +88,6 @@ struct AlbumsScreen: View {
 struct AlbumsScreen_Previews: PreviewProvider {
   static var previews: some View {
     AlbumsScreen()
-      .environmentObject(AlbumsFetcher())
+      .environmentObject(AlbumsViewModel())
   }
 }
