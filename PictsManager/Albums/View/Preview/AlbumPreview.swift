@@ -37,7 +37,7 @@ struct AlbumPreview: View {
     }
     .task {
       do {
-        try await imageFetcher.fetchImage(picture_id: album.cover_id ?? "66129b60fea686857a14f12b")
+        try await imageFetcher.fetchImage(picture_id: album.cover_id ?? "66129b60fea686857a14f12b", lowRes: true)
         
       } catch {
         print("Error fetching image: \(error)")
