@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PhotosList: View {
     @Binding var photos: [Photo]
+    @State var picture_ids: [String]?
     @State private var selectedPhoto: Photo?
     @State private var isPhotoSelected: Bool = false
 

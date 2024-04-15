@@ -9,9 +9,9 @@ import SwiftUI
 
 struct PhotosView: View {
     @StateObject var photosViewModel = PhotosViewModel()
+    @State var album: Album?
     @State private var selectedPeriodIndex = 3
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
-
     let title: String
 
     var body: some View {
