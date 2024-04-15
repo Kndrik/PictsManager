@@ -63,12 +63,12 @@ struct PhotosList: View {
 //    PhotosList()
 //}
     
-struct PhotoList_Preview: PreviewProvider {
-    static var previews: some View {
-        let album = Album(id: 17, name: "Favorites", pictureNames: ["turtlerock", "turtlerock"])
-        PhotosList(pictureURLs: album.pictureNames)
-    }
-}
+//struct PhotoList_Preview: PreviewProvider {
+//    static var previews: some View {
+//        let album = Album(id: 17, name: "Favorites", pictureNames: ["turtlerock", "turtlerock"])
+//        PhotosList(pictureURLs: album.pictureNames)
+//    }
+//}
 
 struct ImageLoader: View {
     var url: String

@@ -12,7 +12,20 @@ struct MyAlbumsRow: View {
   var rowTitle: String
   var albums: [Album]
   var afficherToutButton: Bool
+  @State private var allPictures_id = [""]
+  
+  init(rowTitle: String, albums: [Album], afficherToutButton: Bool) {
+    self.albums = albums
+    self.rowTitle = rowTitle
+    self.afficherToutButton = afficherToutButton
     
+    var combinedPictureIds = [""]
+    for album in albums {
+        combinedPictureIds.append(contentsOf: album.pictures_ids)
+    }
+    self._allPictures_id = State(initialValue: combinedPictureIds)
+  }
+  
   var body: some View {
     VStack(alignment: .leading) {
       HStack {
@@ -40,9 +53,8 @@ struct MyAlbumsRow: View {
               
             NavigationLink {
                 AlbumsScreen()
-//              PhotosList()
             } label: {
-              AlbumPreview(album: Album(id: 17, name: "Récentes", pictureNames: [""]))
+              AlbumPreview(album: Album(id: "124124JHF8234", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: allPictures_id, title: "Récent", viewers_ids: ["eee"]))
             }
             .buttonStyle(PlainButtonStyle())
               
@@ -66,7 +78,8 @@ struct MyAlbumsRow: View {
                 AlbumsScreen()
 //              PhotosList()
             } label: {
-              FavoritesAlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]))
+//              FavoritesAlbumPreview(album: Album(id: 17, name: "Favorites", pictureNames: ["turtlerock"]))
+//              AlbumPreview(album: Album)
             }
             .buttonStyle(PlainButtonStyle())
               
@@ -91,12 +104,16 @@ struct MyAlbumsRow: View {
     }
     .padding(.bottom, 30)
     .listRowInsets(EdgeInsets())
+    .task {
+        ForEach(albums) { album in
+//          allPictures_id.append(contentsOf: album.pictures_ids)
+        }
+    }
   }
 }
 
 #Preview {
   AlbumRow(rowTitle: "Mes Albums", albums: [
-    Album(id: 01, name: "Vacances", pictureNames: ["turtlerock", "truc", "03"]),
-    Album(id: 02, name: "Soirée", pictureNames: ["turtlerock", "02"]),
+    Album(id: "6611aef73a0ad873ade492d2", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: ["66129b60fea686857a14f12b", "66129b67fea686857a14f12c", "6611b3b53a0ad873ade492d6", "6611b3b83a0ad873ade492d7"], title: "Parfums", viewers_ids: [])
   ], afficherToutButton: true)
 }

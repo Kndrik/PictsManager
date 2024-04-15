@@ -62,7 +62,6 @@ struct AlbumRow: View {
 
 #Preview {
   AlbumRow(rowTitle: "Mes Albums", albums: [
-    Album(id: 01, name: "Vacances", pictureNames: ["turtlerock", "truc", "03"]),
-    Album(id: 02, name: "Famille", pictureNames: ["turtlerock", "02"]),
+    Album(id: "6611aef73a0ad873ade492d2", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: ["66129b60fea686857a14f12b", "66129b67fea686857a14f12c", "6611b3b53a0ad873ade492d6", "6611b3b83a0ad873ade492d7"], title: "Parfums", viewers_ids: [])
   ], afficherToutButton: true)
 }

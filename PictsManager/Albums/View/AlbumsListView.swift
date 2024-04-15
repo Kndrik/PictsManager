@@ -39,6 +39,6 @@ struct AlbumsListView: View {
     }
 }
 
-#Preview {
-  AlbumsListView(title: "My albums", albums: [Album(id: 29, name: "Vacances", pictureNames: ["turtlerock"]), Album(id: 30, name: "Vacances", pictureNames: ["turtlerock"]), Album(id: 31, name: "Vacances", pictureNames: ["turtlerock"]), Album(id: 32, name: "Vacances", pictureNames: ["turtlerock"])])
-}
+//#Preview {
+//  AlbumsListView(title: "My albums", albums: [Album(id: 29, name: "Vacances", pictureNames: ["turtlerock"]), Album(id: 30, name: "Vacances", pictureNames: ["turtlerock"]), Album(id: 31, name: "Vacances", pictureNames: ["turtlerock"]), Album(id: 32, name: "Vacances", pictureNames: ["turtlerock"])])
+//}

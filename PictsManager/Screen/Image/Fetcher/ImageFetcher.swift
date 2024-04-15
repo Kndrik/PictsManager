@@ -1,39 +1,34 @@
 //
-//  AlbumsFetcher.swift
+//  ImageFetcher.swift
 //  PictsManager
 //
-//  Created by Charles Lamarque on 02/04/2024.
+//  Created by Charles Lamarque on 07/04/2024.
 //
 
+import Foundation
 import SwiftUI
 
-class AlbumsFetcher: ObservableObject {
-  @Published var albumsData: AlbumCollection?
+class ImageFetcher: ObservableObject {
+  @Published var imageData: Data?
   
-  let urlString = Api.Album.albumList
+  let urlString = Api.Picture.pictureList
   
   enum FetchError: Error {
     case badRequest
     case badJSON
   }
   
-  func fetchAlbums() async
+  func fetchImage(picture_id: String) async
   throws {
-    guard let url = URL(string: urlString) else { return }
+    guard let url = URL(string: urlString + "/\(picture_id)") else { return }
     
     var request = URLRequest(url: url)
     request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTFhYTk0M2EwYWQ4NzNhZGU0OTJkMSJ9.ccKyeJlInJ5Rs9QzuYktxhp5V61bc0iTOifaqaVvH2A", forHTTPHeaderField: "Authorization")
     
     let (data, response) = try await URLSession.shared.data(for: request)
     guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
-    
-    Task { @MainActor in
-      do {
-        albumsData = try JSONDecoder().decode(AlbumCollection.self, from: data)
-        print(albumsData?.albums)
-      } catch {
-        print("Error decoding json: \(error)")
-      }
-    }
+
+    print(data)
+    imageData = data
   }
 }
