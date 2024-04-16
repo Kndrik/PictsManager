@@ -81,6 +81,18 @@ struct AlbumsScreen: View {
         print("Error fetching albums: \(error)")
       }
     }
+//    .task {
+//      do {
+//          try await albumsFetcher.fetchAlbums()
+//          if let albumsData = albumsFetcher.albumsData {
+//              print("Albums: \(albumsData)")
+//          } else {
+//              print("Albums data is nil")
+//          }
+//      } catch {
+//          print("Error fetching albums: \(error)")
+//      }
+//    }
   }
 }
 
