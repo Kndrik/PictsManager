@@ -36,10 +36,18 @@ struct PhotosList: View {
 
 struct ImageLoader: View {
     var photo: Photo
+    @State private var isLoading = true
+
     var body: some View {
-        photo.image?
-            .resizable()
-            .rotationEffect(.degrees(90))
+        Group {
+            if photo.image == nil {
+                ProgressView()
+            } else {
+                photo.image?
+                    .resizable()
+                    .rotationEffect(.degrees(90))
+            }
+        }
     }
 }
 
