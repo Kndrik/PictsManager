@@ -43,9 +43,7 @@ struct ImageLoader: View {
             if photo.image == nil {
                 ProgressView()
             } else {
-                photo.image?
-                    .resizable()
-                    .rotationEffect(.degrees(90))
+                photo.image?.resizable()
             }
         }
     }
