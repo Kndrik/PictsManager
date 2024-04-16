@@ -41,6 +41,7 @@ struct Navbar: View {
                         Image(systemName: "magnifyingglass")
                         Text("Rechercher")
                     }
+                    .environmentObject(albumsViewModel)
                 
                 UserScreen(userViewModel: UserViewModel(), authViewModel: AuthViewModel())
                     .tabItem {

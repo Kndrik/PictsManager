@@ -8,33 +8,42 @@
 import SwiftUI
 
 struct Search: View {
-    
+    @EnvironmentObject var albumsViewModel: AlbumsViewModel
+    @State var album: Album?
+    @State var searchResults: [Album] = []
     @State private var searchText = ""
     
-    private let countries = ["France", "England", "USA", "Vietnam", "Japan", "Korea"]
-    
-    private var searchResults : [String] {
-        searchText.isEmpty ? countries : countries.filter { $0.contains(searchText) }
-    }
+//    private let countries = ["France", "England", "USA", "Vietnam", "Japan", "Korea"]
+//    private var searchResults : [String] {
+//        searchText.isEmpty ? countries : countries.filter { $0.contains(searchText) }
+//    }
     
     var body: some View {
         NavigationView {
             VStack {
-                List(searchResults, id: \.self) { country in
-                    Text(country)
+//                Text("Hello")
+                List(searchResults, id: \.self) { album in
+                    Text(album.title)
                 }
+                
+//                Text($albumsViewModel.object)
             }
             .navigationTitle("Rechercher")
             .searchable(text: $searchText)
+            .onChange(of: searchText) { _ in
+                searchAlbums()
+            }
         }
-        
-        //        ZStack(content:{
-        //            Color.blue
-        //
-        //            Image.init(systemName: "magnifyingglass")
-        //                .foregroundColor(Color.white)
-        //                .font(.system(size: 100))
-        //        })
+    }
+    
+    private func searchAlbums() {
+        if !searchText.isEmpty {
+            searchResults = albumsViewModel.albumsData?.albums.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText)
+            } ?? []
+        } else {
+            searchResults = []
+        }
     }
 }
 
