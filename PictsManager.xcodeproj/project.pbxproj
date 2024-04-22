@@ -140,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				2F5A416B2BC2EA3B0010C53E /* Fetcher */,
-				1A4A09F52BA0CF4E0006D27F /* Components */,
 				34DAE5A82BBBFEC300C70075 /* ViewModel */,
 				2209B00F2BA77D5900036F36 /* View */,
 			);
@@ -526,7 +525,6 @@
 				34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */,
 				34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */,
 				34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */,
-				1A4A09ED2BA063E50006D27F /* AlbumsView.swift in Sources */,
 				22BB3B692BA996A000A94254 /* ToastManager.swift in Sources */,
 				2F9DD9102BA8795700567854 /* AlbumPreview.swift in Sources */,
 				2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */,
