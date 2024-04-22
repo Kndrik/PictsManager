@@ -56,16 +56,19 @@ struct PhotosView: View {
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
+                
                 Spacer()
+                
+                PhotosList(photos: $photosViewModel.pictures)
+                
+                if album == nil {
+                    VStack {
+                        Spacer()
+                        PeriodSelector(selectedItem: $selectedPeriodIndex)
+                    }
+                    .padding(.bottom, 10)
+                }
             }
-            
-            PhotosList(photos: $photosViewModel.pictures)
-            
-            VStack {
-                Spacer()
-                PeriodSelector(selectedItem: $selectedPeriodIndex)
-            }
-            .padding(.bottom, 10)
         }
         .onAppear {
             Task {
