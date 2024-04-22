@@ -11,12 +11,14 @@ struct MyAlbumsRow: View {
   @State private var show = false
   var rowTitle: String
   var albums: [Album]
+  var favAlbum: Album
   var afficherToutButton: Bool
   @State private var allPictures_ids = [""]
   @State private var favorites_ids = [""]
   
-  init(rowTitle: String, albums: [Album], afficherToutButton: Bool) {
+  init(rowTitle: String, albums: [Album], favAlbum: Album, afficherToutButton: Bool) {
     self.albums = albums
+    self.favAlbum = favAlbum
     self.rowTitle = rowTitle
     self.afficherToutButton = afficherToutButton
     

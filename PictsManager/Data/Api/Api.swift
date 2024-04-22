@@ -31,5 +31,6 @@ struct Api {
     
     struct Album {
         static let albumList = endpoint(path: "/albums/")
+        static let favAlbum = endpoint(path: "/albums/fav")
     }
 }

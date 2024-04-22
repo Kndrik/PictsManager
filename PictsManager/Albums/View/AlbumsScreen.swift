@@ -18,14 +18,11 @@ struct AlbumsScreen: View {
     NavigationSplitView {
       VStack {
         List {
-          if let albumsData = albumsViewModel.albumsData {
-            MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, afficherToutButton: true)
+          if let albumsData = albumsViewModel.albumsData, let favAlbumData = albumsViewModel.favAlbumData {
+            MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: favAlbumData, afficherToutButton: true)
           } else {
             Text("Loading albums")
           }
-          
-//          AlbumRow(rowTitle: "Albums partagés", albums: [Album(id: 14, name: "Friends", pictureNames: ["turtlerock", "02"])], afficherToutButton: true)
-          //          AlbumRow(rowTitle: "Personnes, animaux et lieux", albums: [Album(id: 16, name: "Friends", pictureNames: ["icybay", "02"])], afficherToutButton: false)
         }
         .listStyle(.inset)
       }
@@ -76,6 +73,7 @@ struct AlbumsScreen: View {
     }
     .task {
       do {
+        try await albumsViewModel.fetchFavAlbum()
         try await albumsViewModel.fetchAlbums()
       } catch {
         print("Error fetching albums: \(error)")
