@@ -9,7 +9,7 @@ import Foundation
 
 struct Api {
 
-   static let baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? "https://picts-api-dev.hollitizz.me"
+   static let baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? "https://"
 
     static func endpoint(path: String) -> String {
         return baseURL + path
