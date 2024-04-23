@@ -68,12 +68,6 @@ class UserViewModel: ObservableObject {
             return
         }
         
-//        let updatedUserData = User(_id: user?._id ?? "", email: user?.email ?? "", username: user?.username ?? "", token: token)
-//        guard let requestBody = try? JSONEncoder().encode(updatedUserData) else {
-//            Logger.user.error("Failed to encode new data")
-//            return
-//        }
-        
         var request =  URLRequest(url: url)
         request.httpMethod = "PATCH"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
