@@ -1,14 +1,15 @@
 //
-//  PhotosList.swift
+//  AlbumPhotosView.swift
 //  PictsManager
 //
-//  Created by Valentin Caure on 12/03/2024.
+//  Created by Stevens on 23/04/2024.
 //
 
 import SwiftUI
 
-struct PhotosView: View {
-    @StateObject var photosViewModel = PhotosViewModel()
+struct AlbumPhotosView: View {
+    @StateObject var albumPhotosViewModel = AlbumPhotosViewModel()
+    @State var album: Album
     @State private var selectedPeriodIndex = 3
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
 
@@ -16,12 +17,10 @@ struct PhotosView: View {
         ZStack {
             VStack {
                 HStack {
-    
-                    Text(periodTitles[selectedPeriodIndex])
+                    Text(album.title)
                       .bold()
                       .font(.title2)
-                  
-                  Spacer()
+                    Spacer()
                     
                     HStack {
                         Button(action: {
@@ -54,19 +53,31 @@ struct PhotosView: View {
                 
                 Spacer()
                 
-                PhotosList(photos: $photosViewModel.pictures)
+                PhotosList(photos: $album.pictures)
+            
             }
         }
         .onAppear {
             Task {
-                if photosViewModel.pictures.isEmpty {
-                    await photosViewModel.getPicturesList()
+                for picture in album.pictures {
+                    if let data = await albumPhotosViewModel.getLowPicturesById(pictureId: picture.id) {
+                       await updatePhotoWithImage(id: picture.id, imageData: data)
+                    }
                 }
+            }
+        }
+    }
+    func updatePhotoWithImage(id: String, imageData: Data)  async {
+        if let index = album.pictures.firstIndex(where: { $0.id == id }) {
+            DispatchQueue.main.async {
+                album.pictures[index].imageData = imageData
             }
         }
     }
 }
 
+/*
 #Preview {
-    PhotosView()
+    AlbumPhotosView()
 }
+*/

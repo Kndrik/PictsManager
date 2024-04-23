@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserResponse: Codable {
-    let _id: String
+    let id: String
     let email: String
     let username: String
 }

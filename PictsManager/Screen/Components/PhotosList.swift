@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhotosList: View {
     @Binding var photos: [Photo]
-    var photoListName: String
+    @State var picture_ids: [String]?
     @State private var selectedPhoto: Photo?
 
     var body: some View {
@@ -30,17 +30,22 @@ struct PhotosList: View {
                 }
                 Color.clear.frame(height: 55)
             }
-            .navigationTitle(photoListName)
         }
     }
 }
 
 struct ImageLoader: View {
     var photo: Photo
+    @State private var isLoading = true
+
     var body: some View {
-        photo.image?
-            .resizable()
-            .rotationEffect(.degrees(90))
+        Group {
+            if photo.image == nil {
+                ProgressView()
+            } else {
+                photo.image?.resizable()
+            }
+        }
     }
 }
 

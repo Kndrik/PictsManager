@@ -8,6 +8,7 @@
 import SwiftUI
 import Foundation
 import AVFoundation
+import OSLog
 
 class CameraViewModel {
 
@@ -111,12 +112,12 @@ class CameraViewModel {
     
     func uploadImage(paramName: String, fileName: String, image: UIImage) {
         guard let url = URL(string: Api.Picture.uploadPicture) else {
-            print("Invalid URL")
+            Logger.camera.error("Invalid URL")
             return
         }
 
         guard let imageData = image.pngData() else {
-            print("Image could not be converted to PNG data")
+            Logger.camera.error("Image could not be converted to PNG data")
             return
         }
 
@@ -128,7 +129,7 @@ class CameraViewModel {
         
         let token = UserSessionManager.shared.getToken()
         if token == nil {
-            print("token null")
+            Logger.camera.error("Token is null")
             return
         }
         
@@ -143,9 +144,9 @@ class CameraViewModel {
 
         URLSession.shared.uploadTask(with: urlRequest, from: data) { responseData, response, error in
                     if let error = error {
-                        print("Failed to upload image: \(error)")
+                        Logger.camera.error("Failed to upload image: \(error)")
                     } else if let jsonData = responseData, let json = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any] {
-                        print(json)
+                        Logger.camera.info("\(json)")
                     }
                 }.resume()
     }

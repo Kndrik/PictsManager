@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Photo: Identifiable, Decodable {
+struct Photo: Identifiable, Codable, Hashable {
     let date: String
     let filename: String
     let id: String
