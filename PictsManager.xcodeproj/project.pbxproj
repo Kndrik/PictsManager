@@ -44,6 +44,8 @@
 		2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */; };
 		2F9DD9162BA9A29600567854 /* FavoritesAlbumPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */; };
 		2FB225D42BBBFF2100E15984 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB225D32BBBFF2100E15984 /* AlbumsViewModel.swift */; };
+		346DB3532BD7A7B100D81059 /* AlbumPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3522BD7A7B100D81059 /* AlbumPhotosView.swift */; };
+		346DB3552BD7A7C800D81059 /* AlbumPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3542BD7A7C800D81059 /* AlbumPhotoViewModel.swift */; };
 		34CAE0CC2BA0564C00381E39 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0CB2BA0564C00381E39 /* HomeScreen.swift */; };
 		34CAE0D32BA05D5800381E39 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0D22BA05D5800381E39 /* LoginForm.swift */; };
 		34CAE0D52BA05DA900381E39 /* RegisterForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0D42BA05DA900381E39 /* RegisterForm.swift */; };
@@ -98,6 +100,8 @@
 		2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumsRow.swift; sourceTree = "<group>"; };
 		2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAlbumPreview.swift; sourceTree = "<group>"; };
 		2FB225D32BBBFF2100E15984 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
+		346DB3522BD7A7B100D81059 /* AlbumPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlbumPhotosView.swift; path = ../../../../../../.Trash/PictsManager/PictsManager/Data/Models/Forms/AlbumPhotosView.swift; sourceTree = "<group>"; };
+		346DB3542BD7A7C800D81059 /* AlbumPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlbumPhotoViewModel.swift; path = ../../../../../../AlbumPhotoViewModel.swift; sourceTree = "<group>"; };
 		34CAE0CB2BA0564C00381E39 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		34CAE0D22BA05D5800381E39 /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		34CAE0D42BA05DA900381E39 /* RegisterForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		220C46D92BB8BBD8008FCAC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				346DB3512BD7A78700D81059 /* AlbumPhotos */,
 				2F9DD9092BA768B700567854 /* AlbumsScreen.swift */,
 				22231A9F2BB322580061E028 /* AlbumsListView.swift */,
 				220C46E12BBC4158008FCAC8 /* Preview */,
@@ -372,6 +377,15 @@
 			path = Albums;
 			sourceTree = "<group>";
 		};
+		346DB3512BD7A78700D81059 /* AlbumPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				346DB3522BD7A7B100D81059 /* AlbumPhotosView.swift */,
+				346DB3542BD7A7C800D81059 /* AlbumPhotoViewModel.swift */,
+			);
+			path = AlbumPhotos;
+			sourceTree = "<group>";
+		};
 		34CAE0CA2BA055D300381E39 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,12 +522,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BB3B602BA89CEE00A94254 /* ToastStyle.swift in Sources */,
+				346DB3552BD7A7C800D81059 /* AlbumPhotoViewModel.swift in Sources */,
 				22BB3B642BA8DCBB00A94254 /* ToastHelper.swift in Sources */,
 				225F51752BAB57A400B60E7F /* ScreenLinearColor.swift in Sources */,
 				22BB3B4D2BA79A4E00A94254 /* Navbar.swift in Sources */,
 				1A4A09EB2BA063D90006D27F /* PhotosView.swift in Sources */,
 				22DCFAAF2BB085740019A59F /* UserResponse.swift in Sources */,
 				1A4A09F32BA0880F0006D27F /* ContentView.swift in Sources */,
+				346DB3532BD7A7B100D81059 /* AlbumPhotosView.swift in Sources */,
 				34DAE5AA2BBBFEDE00C70075 /* PhotosViewModel.swift in Sources */,
 				1A4A09FA2BA0EDF30006D27F /* PeriodSelector.swift in Sources */,
 				1A4A09F82BA0CF630006D27F /* PhotosList.swift in Sources */,
@@ -689,7 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PictsManager/Preview Content\"";
-				DEVELOPMENT_TEAM = QT32FULF4Q;
+				DEVELOPMENT_TEAM = 4Z3LZF2A32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for capturing photos.";
@@ -704,7 +720,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = pictsmanager.epitech.com;
+				PRODUCT_BUNDLE_IDENTIFIER = pictsmanager.epitech1.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -722,7 +738,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PictsManager/Preview Content\"";
-				DEVELOPMENT_TEAM = QT32FULF4Q;
+				DEVELOPMENT_TEAM = 4Z3LZF2A32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for capturing photos.";
@@ -737,7 +753,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = pictsmanager.epitech.com;
+				PRODUCT_BUNDLE_IDENTIFIER = pictsmanager.epitech1.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

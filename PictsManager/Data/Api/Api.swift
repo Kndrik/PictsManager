@@ -8,8 +8,8 @@
 import Foundation
 
 struct Api {
-    static let baseURL = "http://localhost:3000"
-//    static let baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? "https://"
+
+   static let baseURL = ProcessInfo.processInfo.environment["BASE_URL"] ?? "https://picts-api-dev.hollitizz.me"
 
     static func endpoint(path: String) -> String {
         return baseURL + path

@@ -29,7 +29,7 @@ struct AlbumPreview: View {
           }
         Text(album.title)
           .padding(.bottom, -8)
-        Text(String(album.pictures_ids.count))
+        Text(String(album.pictures.count))
           .foregroundStyle(Color.gray)
       } else {
           Image(systemName: "photo")
@@ -46,11 +46,12 @@ struct AlbumPreview: View {
   }
 }
 
+/*
+
 #Preview {
-  AlbumPreview(album: Album(id: "1234", cover_id: "66129b60fea686857a14f12b", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: [
-    "66129b60fea686857a14f12b",
-    "66129b67fea686857a14f12c",
-    "6611b3b53a0ad873ade492d6",
-    "6611b3b83a0ad873ade492d7"
-  ], title: "Parfums", viewers_ids: []), isFavorite: true)
+
+    var photo = [Photo(date: "2024-04-09T12:21:41.145720", filename: "test", id: "66129b60fea686857a14f12b", location: nil, owner_id: "660038c19431446698d6d4b6", viewers_ids: [], imageData: nil)]
+        
+  AlbumPreview(album: Album(id: "1234", cover_id: "66129b60fea686857a14f12b", owner_id: "6611aa943a0ad873ade492d1", pictures: photo, title: "Parfums", viewers_ids: []), isFavorite: true)
 }
+*/

@@ -33,13 +33,11 @@ class ImageFetcher: ObservableObject {
         
         var request = URLRequest(url: url)
         
-        //        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MTFhYTk0M2EwYWQ4NzNhZGU0OTJkMSJ9.ccKyeJlInJ5Rs9QzuYktxhp5V61bc0iTOifaqaVvH2A", forHTTPHeaderField: "Authorization")
-        
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         let (data, response) = try await URLSession.shared.data(for: request)
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
         
-        print("image: \(data)")
         DispatchQueue.main.async {
             self.imageData = data
         }

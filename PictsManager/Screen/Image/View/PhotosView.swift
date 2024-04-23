@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PhotosView: View {
     @StateObject var photosViewModel = PhotosViewModel()
-    @State var album: Album?
     @State private var selectedPeriodIndex = 3
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
 
@@ -17,15 +16,11 @@ struct PhotosView: View {
         ZStack {
             VStack {
                 HStack {
-                  if let album = album {
-                    Text(album.title)
-                      .bold()
-                      .font(.title2)
-                  } else {
+    
                     Text(periodTitles[selectedPeriodIndex])
                       .bold()
                       .font(.title2)
-                  }
+                  
                   Spacer()
                     
                     HStack {
@@ -60,14 +55,6 @@ struct PhotosView: View {
                 Spacer()
                 
                 PhotosList(photos: $photosViewModel.pictures)
-                
-                if album == nil {
-                    VStack {
-                        Spacer()
-                        PeriodSelector(selectedItem: $selectedPeriodIndex)
-                    }
-                    .padding(.bottom, 10)
-                }
             }
         }
         .onAppear {

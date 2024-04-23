@@ -18,7 +18,7 @@ struct AlbumsScreen: View {
     NavigationSplitView {
       VStack {
         List {
-          if let albumsData = albumsViewModel.albumsData, let favAlbumData = albumsViewModel.favAlbumData {
+          if let albumsData = albumsViewModel.albumsData{
             MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: albumsData.albums[0], afficherToutButton: true)
           } else {
             Text("Loading albums")
@@ -73,24 +73,12 @@ struct AlbumsScreen: View {
     }
     .task {
       do {
-        try await albumsViewModel.fetchFavAlbum()
+        //try await albumsViewModel.fetchFavAlbum()
         try await albumsViewModel.fetchAlbums()
       } catch {
         print("Error fetching albums: \(error)")
       }
     }
-//    .task {
-//      do {
-//          try await albumsFetcher.fetchAlbums()
-//          if let albumsData = albumsFetcher.albumsData {
-//              print("Albums: \(albumsData)")
-//          } else {
-//              print("Albums data is nil")
-//          }
-//      } catch {
-//          print("Error fetching albums: \(error)")
-//      }
-//    }
   }
 }
 

@@ -22,7 +22,7 @@ struct ImageDetails: View {
             imageDetailsViewModel.image?
                     .resizable()
                     .scaledToFit()
-                    .rotationEffect(.degrees(90))
+                    .rotationEffect(.degrees(0))
 
             VStack {
                 Spacer()

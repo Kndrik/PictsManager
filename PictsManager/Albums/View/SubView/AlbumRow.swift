@@ -40,7 +40,7 @@ struct AlbumRow: View {
           HStack(alignment: .top, spacing: 10) {
             ForEach(albums) { album in
               NavigationLink {
-                  PhotosView(album: album)
+                  AlbumPhotosView(album: album)
               } label: {
                 AlbumPreview(album: album, isFavorite: false)
               }
@@ -48,19 +48,20 @@ struct AlbumRow: View {
             }
           }
           .padding(.horizontal)
-          .scrollTargetLayout()
+         // .scrollTargetLayout()
         }
       }
-      .scrollTargetBehavior(.viewAligned)
+     // .scrollTargetBehavior(.viewAligned)
         
     }
     .padding(.bottom, 30)
     .listRowInsets(EdgeInsets())
   }
 }
-
+/*
 #Preview {
   AlbumRow(rowTitle: "Mes Albums", albums: [
-    Album(id: "6611aef73a0ad873ade492d2", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: ["66129b60fea686857a14f12b", "66129b67fea686857a14f12c", "6611b3b53a0ad873ade492d6", "6611b3b83a0ad873ade492d7"], title: "Parfums", viewers_ids: [])
+    Album(id: "6611aef73a0ad873ade492d2", owner_id: "6611aa943a0ad873ade492d1", pictures: [Photo(date: String("2024-04-09T12:21:41.145720"), filename: "test", id: "66129b60fea686857a14f12b", location: nil, owner_id: "660038c19431446698d6d4b6", viewers_ids: [], imageData: nil)], title: "Parfums", viewers_ids: [])
   ], afficherToutButton: true)
-}
+}*/
+
