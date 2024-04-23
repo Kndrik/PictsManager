@@ -44,8 +44,8 @@
 		2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */; };
 		2F9DD9162BA9A29600567854 /* FavoritesAlbumPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */; };
 		2FB225D42BBBFF2100E15984 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB225D32BBBFF2100E15984 /* AlbumsViewModel.swift */; };
-		346DB3532BD7A7B100D81059 /* AlbumPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3522BD7A7B100D81059 /* AlbumPhotosView.swift */; };
-		346DB3552BD7A7C800D81059 /* AlbumPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3542BD7A7C800D81059 /* AlbumPhotoViewModel.swift */; };
+		346DB3572BD7B3A500D81059 /* AlbumPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3562BD7B3A500D81059 /* AlbumPhotosViewModel.swift */; };
+		346DB3592BD7B3D100D81059 /* AlbumPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3582BD7B3D100D81059 /* AlbumPhotosView.swift */; };
 		34CAE0CC2BA0564C00381E39 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0CB2BA0564C00381E39 /* HomeScreen.swift */; };
 		34CAE0D32BA05D5800381E39 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0D22BA05D5800381E39 /* LoginForm.swift */; };
 		34CAE0D52BA05DA900381E39 /* RegisterForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0D42BA05DA900381E39 /* RegisterForm.swift */; };
@@ -100,8 +100,8 @@
 		2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumsRow.swift; sourceTree = "<group>"; };
 		2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAlbumPreview.swift; sourceTree = "<group>"; };
 		2FB225D32BBBFF2100E15984 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
-		346DB3522BD7A7B100D81059 /* AlbumPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlbumPhotosView.swift; path = ../../../../../../.Trash/PictsManager/PictsManager/Data/Models/Forms/AlbumPhotosView.swift; sourceTree = "<group>"; };
-		346DB3542BD7A7C800D81059 /* AlbumPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlbumPhotoViewModel.swift; path = ../../../../../../AlbumPhotoViewModel.swift; sourceTree = "<group>"; };
+		346DB3562BD7B3A500D81059 /* AlbumPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPhotosViewModel.swift; sourceTree = "<group>"; };
+		346DB3582BD7B3D100D81059 /* AlbumPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPhotosView.swift; sourceTree = "<group>"; };
 		34CAE0CB2BA0564C00381E39 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		34CAE0D22BA05D5800381E39 /* LoginForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		34CAE0D42BA05DA900381E39 /* RegisterForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm.swift; sourceTree = "<group>"; };
@@ -380,8 +380,8 @@
 		346DB3512BD7A78700D81059 /* AlbumPhotos */ = {
 			isa = PBXGroup;
 			children = (
-				346DB3522BD7A7B100D81059 /* AlbumPhotosView.swift */,
-				346DB3542BD7A7C800D81059 /* AlbumPhotoViewModel.swift */,
+				346DB3562BD7B3A500D81059 /* AlbumPhotosViewModel.swift */,
+				346DB3582BD7B3D100D81059 /* AlbumPhotosView.swift */,
 			);
 			path = AlbumPhotos;
 			sourceTree = "<group>";
@@ -522,14 +522,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BB3B602BA89CEE00A94254 /* ToastStyle.swift in Sources */,
-				346DB3552BD7A7C800D81059 /* AlbumPhotoViewModel.swift in Sources */,
 				22BB3B642BA8DCBB00A94254 /* ToastHelper.swift in Sources */,
+				346DB3592BD7B3D100D81059 /* AlbumPhotosView.swift in Sources */,
 				225F51752BAB57A400B60E7F /* ScreenLinearColor.swift in Sources */,
 				22BB3B4D2BA79A4E00A94254 /* Navbar.swift in Sources */,
 				1A4A09EB2BA063D90006D27F /* PhotosView.swift in Sources */,
 				22DCFAAF2BB085740019A59F /* UserResponse.swift in Sources */,
 				1A4A09F32BA0880F0006D27F /* ContentView.swift in Sources */,
-				346DB3532BD7A7B100D81059 /* AlbumPhotosView.swift in Sources */,
 				34DAE5AA2BBBFEDE00C70075 /* PhotosViewModel.swift in Sources */,
 				1A4A09FA2BA0EDF30006D27F /* PeriodSelector.swift in Sources */,
 				1A4A09F82BA0CF630006D27F /* PhotosList.swift in Sources */,
@@ -550,6 +549,7 @@
 				22D8B6322B98F06100734A99 /* LoginScreen.swift in Sources */,
 				34DAE59A2BB2D3EF00C70075 /* CustomCameraView.swift in Sources */,
 				220C46DF2BB9D687008FCAC8 /* Logger.swift in Sources */,
+				346DB3572BD7B3A500D81059 /* AlbumPhotosViewModel.swift in Sources */,
 				2F5A416D2BC2EA490010C53E /* ImageFetcher.swift in Sources */,
 				226B369E2B9EFE2B001BB288 /* RegisterScreen.swift in Sources */,
 				22946C622BA5B16E0052B612 /* UserViewModel.swift in Sources */,
