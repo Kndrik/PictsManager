@@ -19,7 +19,7 @@ struct AlbumsScreen: View {
       VStack {
         List {
           if let albumsData = albumsViewModel.albumsData, let favAlbumData = albumsViewModel.favAlbumData {
-            MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: favAlbumData, afficherToutButton: true)
+            MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: albumsData.albums[0], afficherToutButton: true)
           } else {
             Text("Loading albums")
           }
