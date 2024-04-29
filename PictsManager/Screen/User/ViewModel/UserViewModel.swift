@@ -44,52 +44,123 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    func patchUser(username: String? = nil, email: String? = nil) {
-        // TODO: PATCH method
+    /// Update username & email. This will send the whole User object since this is a PUT
+    func putUser(username: String, email: String, password: String, completion: @escaping (Bool) -> Void) async {
         guard let url = URL(string: Api.User.me) else {
-            Logger.user.debug("Invalid URL for users/me endpoint")
+            Logger.user.debug("Invalid URL for updateUser endpoint")
+            completion(false)
             return
         }
         
-        guard let token = UserSessionManager.shared.getToken() else {
+        var request = URLRequest(url: url)
+        
+        if let token = UserSessionManager.shared.getToken() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
             Logger.user.error("User not authenticated")
             return
         }
         
-        var requestBody = [String: String]()
-        if let username = username {
-            requestBody["username"] = username
-        }
-        if let email = email {
-            requestBody["email"] = email
-        }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        guard let encodedRequestBody = try? JSONEncoder().encode(requestBody) else {
+        var requestBody: Encodable
+                
+        if (username != user?.username || email != user?.email){
+            request.httpMethod = "PUT"
+            requestBody = UpdateUserForm(email: email, username: username, password: password)
+        } else {
             return
         }
         
-        var request =  URLRequest(url: url)
-        request.httpMethod = "PATCH"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        if let jsonData = try? JSONEncoder().encode(requestBody) {
+            request.httpBody = jsonData
+            print(jsonData)
+        } else {
+            Logger.user.error("Failed to encode user data")
+            completion(false)
+            return
+        }
+                
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                Logger.user.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+                completion(false)
+                return
+            }
+
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                if let responseData = try? JSONDecoder().decode(UpdateUserForm.self, from: data) {
+                    completion(true)
+                }
+            } else {
+                if let errorMessage = String(data: data, encoding: .utf8) {
+                    Logger.auth.error("\(errorMessage)")
+                } else {
+                    Logger.auth.error("\(error?.localizedDescription ?? "Unknown error")")
+                }
+                completion(false)
+            }
+        }.resume()
+    }
+    
+    /// Update password. This method requires only a password since this is a PATCH
+    func patchUser(oldpassword: String, newpassword: String, completion: @escaping (Bool) -> Void) async {
+        guard let url = URL(string: Api.User.me) else {
+            Logger.user.debug("Invalid URL for updateUser endpoint")
+            completion(false)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        if let token = UserSessionManager.shared.getToken() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            Logger.user.error("User not authenticated")
+            return
+        }
+        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = /*requestBody*/ encodedRequestBody
+        
+        var requestBody: Encodable
+        
+        if (!oldpassword.isEmpty && !newpassword.isEmpty) {
+            request.httpMethod = "PATCH"
+            requestBody = UpdatePasswordForm(old_password: oldpassword, new_password: newpassword)
+        } else {
+            completion(false)
+            return
+        }
+                
+        if let jsonData = try? JSONEncoder().encode(requestBody) {
+            request.httpBody = jsonData
+            print(jsonData)
+        } else {
+            Logger.user.error("Failed to encode user data")
+            completion(false)
+            return
+        }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let _data = data, let httpResponse = response as? HTTPURLResponse, error == nil else {
-                Logger.auth.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+            guard let data = data, error == nil else {
+                Logger.user.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+                completion(false)
                 return
             }
             
-            if httpResponse.statusCode == 200 {
-                print("User: ", requestBody)
-                // TODO: success
-//                if let responseData = try? JSONDecoder().decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                if let responseData = try? JSONDecoder().decode(UpdateUserForm.self, from: data) {
+                    completion(true)
+                }
             } else {
-                Logger.user.error("error")
+                if let errorMessage = String(data: data, encoding: .utf8) {
+                    Logger.auth.error("\(errorMessage)")
+                } else {
+                    Logger.auth.error("\(error?.localizedDescription ?? "Unknown error")")
+                }
+                completion(false)
             }
         }.resume()
-        
-        
     }
 }
         
