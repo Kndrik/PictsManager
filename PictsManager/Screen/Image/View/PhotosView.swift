@@ -59,9 +59,7 @@ struct PhotosView: View {
         }
         .onAppear {
             Task {
-                if photosViewModel.pictures.isEmpty {
-                    await photosViewModel.getPicturesList()
-                }
+                await photosViewModel.getPicturesList()
             }
         }
     }

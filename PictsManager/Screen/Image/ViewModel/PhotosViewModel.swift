@@ -41,7 +41,6 @@ class PhotosViewModel: ObservableObject {
             return
         }
 
-
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -51,12 +50,16 @@ class PhotosViewModel: ObservableObject {
                 return
             }
             let picturesResponse = try JSONDecoder().decode([String: [Photo]].self, from: data)
-               await MainActor.run {
-                   self.pictures = picturesResponse["pictures"] ?? []
-               }
-            for picture in pictures {
-                if let data = await getLowPicturesById(pictureId: picture.id) {
-                   await updatePhotoWithImage(id: picture.id, imageData: data)
+            let newPictures = picturesResponse["pictures"] ?? []
+
+            for newPicture in newPictures {
+                if !self.pictures.contains(where: { $0.id == newPicture.id }) {
+                    await MainActor.run {
+                        self.pictures.append(newPicture)
+                    }
+                    if let data = await getLowPicturesById(pictureId: newPicture.id) {
+                        await updatePhotoWithImage(id: newPicture.id, imageData: data)
+                    }
                 }
             }
         } catch {
