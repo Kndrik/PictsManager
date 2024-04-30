@@ -13,14 +13,16 @@ struct MyAlbumsRow: View {
   var albums: [Album]
   var favAlbum: Album
   var afficherToutButton: Bool
+  var recentAlbum: Album
   @State private var allPictures_ids = [""]
   @State private var favorites_ids = [""]
   
-  init(rowTitle: String, albums: [Album], favAlbum: Album, afficherToutButton: Bool) {
+  init(rowTitle: String, albums: [Album], favAlbum: Album, recentAlbum: Album, afficherToutButton: Bool) {
     self.albums = albums
     self.favAlbum = favAlbum
     self.rowTitle = rowTitle
     self.afficherToutButton = afficherToutButton
+    self.recentAlbum = recentAlbum
   }
   
   var body: some View {
@@ -49,10 +51,9 @@ struct MyAlbumsRow: View {
           HStack(alignment: .top, spacing: 10) {
               
             NavigationLink {
-                AlbumsScreen()
+              AlbumPhotosView(album: recentAlbum)
             } label: {
-                /*
-              AlbumPreview(album: Album(id: "124124JHF8234", owner_id: "6611aa943a0ad873ade492d1", pictures_ids: allPictures_ids, title: "Récent", viewers_ids: ["eee"]), isFavorite: false)*/
+              AlbumPreview(album: recentAlbum, isFavorite: false)
             }
             .buttonStyle(PlainButtonStyle())
               
@@ -72,9 +73,9 @@ struct MyAlbumsRow: View {
             
           HStack(alignment: .top, spacing: 10) {
             NavigationLink {
-                AlbumsScreen()
+                AlbumPhotosView(album: favAlbum)
             } label: {
-    
+                AlbumPreview(album: favAlbum, isFavorite: true)
             }
             .buttonStyle(PlainButtonStyle())
               

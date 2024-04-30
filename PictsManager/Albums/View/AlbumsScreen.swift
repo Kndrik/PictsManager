@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AlbumsScreen: View {
   @EnvironmentObject var albumsViewModel: AlbumsViewModel
+  @EnvironmentObject var photosViewModel: PhotosViewModel
   @State private var addingAlbum = false
   @State private var addingFolder = false;
   @State private var title = ""
@@ -18,8 +19,11 @@ struct AlbumsScreen: View {
     NavigationSplitView {
       VStack {
         List {
-          if let albumsData = albumsViewModel.albumsData{
-            MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: albumsData.albums[0], afficherToutButton: true)
+          if let albumsData = albumsViewModel.albumsData,
+             let favAlbum = albumsViewModel.favAlbumData,
+             photosViewModel.pictures.count > 0 {
+            let recentAlbum = Album(cover_id: photosViewModel.pictures[0].id, owner_id: favAlbum.owner_id, pictures: photosViewModel.pictures, title: "Récentes")
+            MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: favAlbum, recentAlbum: recentAlbum, afficherToutButton: true)
           } else {
             Text("Loading albums")
           }
@@ -73,8 +77,9 @@ struct AlbumsScreen: View {
     }
     .task {
       do {
-        //try await albumsViewModel.fetchFavAlbum()
+        try await albumsViewModel.fetchFavAlbum()
         try await albumsViewModel.fetchAlbums()
+        await photosViewModel.getPicturesList()
       } catch {
         print("Error fetching albums: \(error)")
       }
