@@ -11,6 +11,7 @@ struct Photo: Identifiable, Codable, Hashable {
     let date: String
     let filename: String
     let id: String
+    let is_fav: Bool
     let location: String?
     let owner_id: String
     let viewers_ids: [String]

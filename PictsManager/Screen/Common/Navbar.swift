@@ -13,6 +13,7 @@ struct Navbar: View {
     @EnvironmentObject var toastManager: ToastManager
     @State private var toast: Toast? = nil
     @StateObject private var albumsViewModel = AlbumsViewModel()
+    @StateObject private var photosViewModel = PhotosViewModel()
     
     var body: some View {
         VStack {
@@ -29,6 +30,7 @@ struct Navbar: View {
                         Text("Albums")
                     }
                     .environmentObject(albumsViewModel)
+                    .environmentObject(photosViewModel)
                 
                 CameraScreen()
                     .tabItem {

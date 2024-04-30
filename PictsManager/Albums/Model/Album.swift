@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Album: Hashable, Codable, Identifiable {
-  var id: String
+  var id: String?
   var cover_id: String?
   var owner_id: String
   var pictures: [Photo]
