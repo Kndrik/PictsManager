@@ -63,6 +63,7 @@
 		34DAE5AE2BC436F300C70075 /* ImageDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */; };
 		34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5AF2BC5846900C70075 /* ImageDetails.swift */; };
 		34DAE5B22BC5E38300C70075 /* ShareForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAE5B12BC5E38300C70075 /* ShareForm.swift */; };
+		8F253051ACF131555929552E /* OrientationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F253AE78EC34FC1A1C9ED1F /* OrientationInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +124,7 @@
 		34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsViewModel.swift; sourceTree = "<group>"; };
 		34DAE5AF2BC5846900C70075 /* ImageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetails.swift; sourceTree = "<group>"; };
 		34DAE5B12BC5E38300C70075 /* ShareForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareForm.swift; sourceTree = "<group>"; };
+		8F253AE78EC34FC1A1C9ED1F /* OrientationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +423,7 @@
 				226B369A2B9EECFC001BB288 /* Api */,
 				34CAE0CE2BA05C5700381E39 /* Models */,
 				34CAE0D62BA0622B00381E39 /* UserSessionManager.swift */,
+				8F253AE78EC34FC1A1C9ED1F /* OrientationInfo.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				22BB3B622BA8C5A800A94254 /* ToastModifier.swift in Sources */,
 				22BB3B532BA87D9F00A94254 /* LoginResponse.swift in Sources */,
 				22D8B62E2B98ECED00734A99 /* User.swift in Sources */,
+				8F253051ACF131555929552E /* OrientationInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
