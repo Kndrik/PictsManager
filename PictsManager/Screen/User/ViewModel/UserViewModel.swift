@@ -74,7 +74,6 @@ class UserViewModel: ObservableObject {
         
         if let jsonData = try? JSONEncoder().encode(requestBody) {
             request.httpBody = jsonData
-            print(jsonData)
         } else {
             Logger.user.error("Failed to encode user data")
             completion(false)
@@ -134,7 +133,6 @@ class UserViewModel: ObservableObject {
                 
         if let jsonData = try? JSONEncoder().encode(requestBody) {
             request.httpBody = jsonData
-            print(jsonData)
         } else {
             Logger.user.error("Failed to encode user data")
             completion(false)

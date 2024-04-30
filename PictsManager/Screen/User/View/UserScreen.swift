@@ -105,8 +105,6 @@ struct UserScreen: View {
             }
             .onReceive(userViewModel.$user) { user in
                 if let user = user {
-                    print(user.username)
-                    print(user.email)
                     editableUsername = user.username
                     editableEmail = user.email
                 }
