@@ -17,6 +17,7 @@ struct UserScreen: View {
     @State private var editableEmail: String = ""
     @State private var isLoggedOut = false
     @State private var isUserLoaded = false
+    @State private var isShowingSheet = false
     @EnvironmentObject private var toastManager: ToastManager
 
     var body: some View {
@@ -24,7 +25,7 @@ struct UserScreen: View {
             VStack {
                 
                 Spacer()
-        
+                        
                 TextField("Username", text: $editableUsername)
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -33,7 +34,7 @@ struct UserScreen: View {
                     .autocapitalization(.none)
                     .disabled(!isEditing)
                     .scaleEffect(isEditing ? 1.1 : 1.0)
-                    .animation(.easeInOut(duration: 0.2), value: isEditing)
+                .animation(.easeInOut(duration: 0.2), value: isEditing)
                 
                 TextField("Email", text: $editableEmail)
                     .padding()
@@ -45,14 +46,21 @@ struct UserScreen: View {
                     .scaleEffect(isEditing ? 1.1 : 1.0)
                     .animation(.easeInOut(duration: 0.2), value: isEditing)
                 
-                SecureField("Password", text: $editableEmail)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                    .disabled(!isEditing)
-                    .scaleEffect(isEditing ? 1.1 : 1.0)
-                    .animation(.easeInOut(duration: 0.2), value: isEditing)
+                Button(action: {
+                    isShowingSheet.toggle()
+                }) {
+                    Text("Change password")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .sheet(isPresented: $isShowingSheet) {
+                    ChangePasswordSheet(isShowingSheet: $isShowingSheet)
+                }
                 
                 Button(action: {
                     authViewModel.logout()
@@ -69,18 +77,23 @@ struct UserScreen: View {
                         .cornerRadius(10)
                 }
                 .navigationDestination(isPresented: $isLoggedOut) { AuthScreen().navigationBarBackButtonHidden(true) }
-                
-                
             }
             .padding()
             .toolbar {
                 ToolbarItem {
                     Button(action: {
                         if isEditing {
-                            userViewModel.patchUser(
-                                username: isEditing ? editableUsername : nil,
-                                email: isEditing ? editableEmail : nil
-                            )
+                            Task {
+                                await userViewModel.putUser(username: editableUsername, email: editableEmail, password: "") { success in
+                                    DispatchQueue.main.async {
+                                        if success {
+                                            toastManager.toast = Toast(style: .success, message: "Fields are modified with success")
+                                        } else {
+                                            toastManager.toast = Toast(style: .error, message: "error herere")
+                                        }
+                                    }
+                                }
+                            }
                         }
                         isEditing.toggle()
                     }) {
@@ -90,8 +103,6 @@ struct UserScreen: View {
             }
             .onReceive(userViewModel.$user) { user in
                 if let user = user {
-                    print(user.username)
-                    print(user.email)
                     editableUsername = user.username
                     editableEmail = user.email
                 }

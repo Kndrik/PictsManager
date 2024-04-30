@@ -28,6 +28,9 @@
 		22BB3B642BA8DCBB00A94254 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB3B632BA8DCBB00A94254 /* ToastHelper.swift */; };
 		22BB3B662BA8E17A00A94254 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB3B652BA8E17A00A94254 /* ToastView.swift */; };
 		22BB3B692BA996A000A94254 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB3B682BA996A000A94254 /* ToastManager.swift */; };
+		22D363AD2BDE5E5F00A6A6BE /* UpdateUserForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D363AC2BDE5E5F00A6A6BE /* UpdateUserForm.swift */; };
+		22D363AF2BDFE1BF00A6A6BE /* ChangePasswordSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D363AE2BDFE1BF00A6A6BE /* ChangePasswordSheet.swift */; };
+		22D363B12BDFEC3A00A6A6BE /* UpdatePasswordForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D363B02BDFEC3A00A6A6BE /* UpdatePasswordForm.swift */; };
 		22D8B62E2B98ECED00734A99 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8B62D2B98ECED00734A99 /* User.swift */; };
 		22D8B6322B98F06100734A99 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8B6312B98F06100734A99 /* LoginScreen.swift */; };
 		22D8B6342B98F1C300734A99 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8B6332B98F1C300734A99 /* AuthViewModel.swift */; };
@@ -83,6 +86,9 @@
 		22BB3B632BA8DCBB00A94254 /* ToastHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
 		22BB3B652BA8E17A00A94254 /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToastView.swift; path = PictsManager/Screen/Common/Toast/ToastView.swift; sourceTree = SOURCE_ROOT; };
 		22BB3B682BA996A000A94254 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		22D363AC2BDE5E5F00A6A6BE /* UpdateUserForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserForm.swift; sourceTree = "<group>"; };
+		22D363AE2BDFE1BF00A6A6BE /* ChangePasswordSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordSheet.swift; sourceTree = "<group>"; };
+		22D363B02BDFEC3A00A6A6BE /* UpdatePasswordForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordForm.swift; sourceTree = "<group>"; };
 		22D8B62D2B98ECED00734A99 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		22D8B6312B98F06100734A99 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		22D8B6332B98F1C300734A99 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -235,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				2209B00C2BA77B3100036F36 /* UserScreen.swift */,
+				22D363AE2BDFE1BF00A6A6BE /* ChangePasswordSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,6 +323,8 @@
 			isa = PBXGroup;
 			children = (
 				22DCFAAE2BB085740019A59F /* UserResponse.swift */,
+				22D363AC2BDE5E5F00A6A6BE /* UpdateUserForm.swift */,
+				22D363B02BDFEC3A00A6A6BE /* UpdatePasswordForm.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -527,6 +536,7 @@
 				225F51752BAB57A400B60E7F /* ScreenLinearColor.swift in Sources */,
 				22BB3B4D2BA79A4E00A94254 /* Navbar.swift in Sources */,
 				1A4A09EB2BA063D90006D27F /* PhotosView.swift in Sources */,
+				22D363AD2BDE5E5F00A6A6BE /* UpdateUserForm.swift in Sources */,
 				22DCFAAF2BB085740019A59F /* UserResponse.swift in Sources */,
 				1A4A09F32BA0880F0006D27F /* ContentView.swift in Sources */,
 				34DAE5AA2BBBFEDE00C70075 /* PhotosViewModel.swift in Sources */,
@@ -541,6 +551,7 @@
 				34DAE5AC2BBC012E00C70075 /* Photo.swift in Sources */,
 				34DAE5B02BC5846900C70075 /* ImageDetails.swift in Sources */,
 				22BB3B692BA996A000A94254 /* ToastManager.swift in Sources */,
+				22D363B12BDFEC3A00A6A6BE /* UpdatePasswordForm.swift in Sources */,
 				2F9DD9102BA8795700567854 /* AlbumPreview.swift in Sources */,
 				2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */,
 				226B369C2B9EED44001BB288 /* Api.swift in Sources */,
@@ -550,6 +561,7 @@
 				34DAE59A2BB2D3EF00C70075 /* CustomCameraView.swift in Sources */,
 				220C46DF2BB9D687008FCAC8 /* Logger.swift in Sources */,
 				346DB3572BD7B3A500D81059 /* AlbumPhotosViewModel.swift in Sources */,
+				22D363AF2BDFE1BF00A6A6BE /* ChangePasswordSheet.swift in Sources */,
 				2F5A416D2BC2EA490010C53E /* ImageFetcher.swift in Sources */,
 				226B369E2B9EFE2B001BB288 /* RegisterScreen.swift in Sources */,
 				22946C622BA5B16E0052B612 /* UserViewModel.swift in Sources */,

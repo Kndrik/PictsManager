@@ -100,9 +100,6 @@ class AuthViewModel: ObservableObject {
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                 if let responseData = try? JSONDecoder().decode(User.self, from: data) {
                     UserSessionManager.shared.saveAuthToken(responseData.token)
-
-                    print("responseData: ", responseData)
-                    print("After UserSession", UserSessionManager.shared.isAuthenticated)
                 } else {
                     if let errorMessage = String(data: data, encoding: .utf8) {
                         Logger.auth.error("\(errorMessage)")
