@@ -88,7 +88,7 @@ class UserViewModel: ObservableObject {
             }
 
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                if let responseData = try? JSONDecoder().decode(UpdateUserForm.self, from: data) {
+                if (try? JSONDecoder().decode(UpdateUserForm.self, from: data)) != nil {
                     completion(true)
                 }
             } else {
@@ -147,7 +147,7 @@ class UserViewModel: ObservableObject {
             }
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                if let responseData = try? JSONDecoder().decode(UpdateUserForm.self, from: data) {
+                if (try? JSONDecoder().decode(UpdateUserForm.self, from: data)) != nil {
                     completion(true)
                 }
             } else {
