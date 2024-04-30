@@ -22,7 +22,7 @@ struct AlbumsScreen: View {
           if let albumsData = albumsViewModel.albumsData,
              let favAlbum = albumsViewModel.favAlbumData,
              photosViewModel.pictures.count > 0 {
-            let recentAlbum = Album(owner_id: favAlbum.owner_id, pictures: photosViewModel.pictures, title: "Récentes", viewers_ids: [photosViewModel.pictures[0].id])
+            let recentAlbum = Album(cover_id: photosViewModel.pictures[0].id, owner_id: favAlbum.owner_id, pictures: photosViewModel.pictures, title: "Récentes")
             MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: favAlbum, recentAlbum: recentAlbum, afficherToutButton: true)
           } else {
             Text("Loading albums")

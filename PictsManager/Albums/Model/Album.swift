@@ -13,7 +13,7 @@ struct Album: Hashable, Codable, Identifiable {
   var owner_id: String
   var pictures: [Photo]
   var title: String
-  var viewers_ids: [String]
+  var viewers_ids: [String]?
 }
 
 struct AlbumCollection: Codable {
