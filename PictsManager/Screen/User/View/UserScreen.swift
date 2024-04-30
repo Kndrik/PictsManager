@@ -15,8 +15,6 @@ struct UserScreen: View {
     @State private var isEditing = false
     @State private var editableUsername: String = ""
     @State private var editableEmail: String = ""
-    @State private var oldPassword: String = ""
-    @State private var newPassword: String = ""
     @State private var isLoggedOut = false
     @State private var isUserLoaded = false
     @State private var isShowingSheet = false
@@ -61,7 +59,7 @@ struct UserScreen: View {
                         .cornerRadius(10)
                 }
                 .sheet(isPresented: $isShowingSheet) {
-                    ChangePasswordSheet(isShowingSheet: $isShowingSheet, oldPassword: $oldPassword, newPassword: $newPassword)
+                    ChangePasswordSheet(isShowingSheet: $isShowingSheet)
                 }
                 
                 Button(action: {
@@ -86,7 +84,7 @@ struct UserScreen: View {
                     Button(action: {
                         if isEditing {
                             Task {
-                                await userViewModel.putUser(username: editableUsername, email: editableEmail, password: newPassword) { success in
+                                await userViewModel.putUser(username: editableUsername, email: editableEmail, password: "") { success in
                                     DispatchQueue.main.async {
                                         if success {
                                             toastManager.toast = Toast(style: .success, message: "Fields are modified with success")

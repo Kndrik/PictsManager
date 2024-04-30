@@ -11,8 +11,8 @@ import SwiftUI
 struct ChangePasswordSheet: View {
     @StateObject var userViewModel = UserViewModel()
     @Binding var isShowingSheet: Bool
-    @Binding var oldPassword: String
-    @Binding var newPassword: String
+    @State var oldPassword: String = ""
+    @State var newPassword: String = ""
     @EnvironmentObject private var toastManager: ToastManager
     
     var body: some View {
