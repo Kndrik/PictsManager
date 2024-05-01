@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import OSLog
 
-class CameraViewModel {
+class CameraViewModel : ObservableObject{
 
     var session: AVCaptureSession?
     var delegate: AVCapturePhotoCaptureDelegate?

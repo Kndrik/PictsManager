@@ -16,42 +16,39 @@ struct ImageDetails: View {
     @State private var showingDeleteAlert = false
     @State private var showingPopover = false
     @State private var email = ""
-
+    
     var body: some View {
-        ZStack {
+        VStack {
+            Spacer()
             imageDetailsViewModel.image?
-                    .resizable()
-                    .scaledToFit()
-                    .rotationEffect(.degrees(0))
-
-            VStack {
-                Spacer()
-                HStack {
-                    Button(action: {
-                        showingPopover = true
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                                .font(.system(size: 30, weight: .semibold))
-                                .padding()
-                    }
-
-                    Button(action: {
-                        isLiked.toggle()
-                    }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                                .font(.system(size: 30, weight: .semibold))
-                                .padding()
-                                .foregroundColor(isLiked ? .red : .gray)
-                    }
-
-                    Button(action: {
-                        showingDeleteAlert = true
-                    }) {
-                        Image(systemName: "trash")
-                                .font(.system(size: 30, weight: .semibold))
-                                .padding()
-                                .foregroundColor(.red)
-                    }
+                .resizable()
+                .scaledToFit()
+            Spacer()
+            HStack {
+                Button(action: {
+                    showingPopover = true
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.system(size: 30, weight: .semibold))
+                        .padding()
+                }
+                
+                Button(action: {
+                    isLiked.toggle()
+                }) {
+                    Image(systemName: isLiked ? "heart.fill" : "heart")
+                        .font(.system(size: 30, weight: .semibold))
+                        .padding()
+                        .foregroundColor(isLiked ? .red : .gray)
+                }
+                
+                Button(action: {
+                    showingDeleteAlert = true
+                }) {
+                    Image(systemName: "trash")
+                        .font(.system(size: 30, weight: .semibold))
+                        .padding()
+                        .foregroundColor(.red)
                 }
             }
         }
@@ -83,24 +80,24 @@ struct ImageDetails: View {
             }
         }
     }
-
+    
     private func deleteConfirmationAlert() -> Alert {
         Alert(title: Text("Delete Picture"),
               message: Text("Are you sure you want to delete this picture?"),
               primaryButton: .destructive(Text("Delete")) {
-                  Task {
-                      let success = await imageDetailsViewModel.deletePictureById(pictureId: photo.id)
-                      if success {
-                          print("Image deleted successfully")
-                          if let index = photos.firstIndex(where: { $0.id == photo.id }) {
-                              photos.remove(at: index)
-                          }
-                          presentationMode.wrappedValue.dismiss()
-                      } else {
-                          print("Failed to delete image")
-                      }
-                  }
-              },
+            Task {
+                let success = await imageDetailsViewModel.deletePictureById(pictureId: photo.id)
+                if success {
+                    print("Image deleted successfully")
+                    if let index = photos.firstIndex(where: { $0.id == photo.id }) {
+                        photos.remove(at: index)
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                } else {
+                    print("Failed to delete image")
+                }
+            }
+        },
               secondaryButton: .cancel())
     }
 }
