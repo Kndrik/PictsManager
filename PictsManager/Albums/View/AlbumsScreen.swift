@@ -39,35 +39,20 @@ struct AlbumsScreen: View {
             TextField("Titre", text: $title)
             Button {
               title = ""
-              addingAlbum.toggle()
             } label: {
               Text("Annuler")
             }
             Button {
-//                albumsViewModel.createAlbum(name: title)
+              Task {
+                try await albumsViewModel.createAlbum(name: title)
+                try await albumsViewModel.fetchAlbums()
+              }
             } label: {
               Text("Enregistrer")
             }
-            .disabled(title.isEmpty)
+//            .disabled(title.isEmpty)
           } message: {
             Text("Saisissez un nom pour cet album.")
-          }
-          .alert("Nouveau dossier", isPresented: $addingFolder) {
-            TextField("Titre", text: $folderName)
-            Button {
-              folderName = ""
-              addingFolder.toggle()
-            } label: {
-              Text("Annuler")
-            }
-            Button {
-//                albumsViewModel.createFolder(name: folderName)
-            } label: {
-              Text("Enregistrer")
-            }
-            .disabled(folderName.isEmpty)
-          } message: {
-            Text("Saisissez un nom pour ce dossier.")
           }
         }
       }
@@ -92,5 +77,6 @@ struct AlbumsScreen_Previews: PreviewProvider {
   static var previews: some View {
     AlbumsScreen()
       .environmentObject(AlbumsViewModel())
+      .environmentObject(PhotosViewModel())
   }
 }

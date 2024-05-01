@@ -21,6 +21,7 @@ class AlbumsViewModel: ObservableObject {
   }
   
   func fetchAlbums() async throws {
+    print("fetching albums...")
     guard let url = URL(string: urlString) else {
       Logger.album.debug("Invalid URL for /albums endpoint")
       return
@@ -74,9 +75,36 @@ class AlbumsViewModel: ObservableObject {
     }
   }
   
-  func createAlbum(name: String) {
-    // Call API to create the album
-    print("\(name)")
+  func createAlbum(name: String) async throws {
+    print("Creating album...")
+    guard let url = URL(string: urlString) else {
+      Logger.album.debug("Invalid URL for /albums endpoint")
+      return
+    }
+    
+    guard let token = UserSessionManager.shared.getToken() else {
+      Logger.user.error("User not authenticated")
+      return
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+      
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    
+    let albumRequest = AlbumCreation(name: name)
+    
+    let bodyJson = try JSONEncoder().encode(albumRequest)
+    print(bodyJson)
+    request.httpBody = bodyJson
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
+  }
+  
+  func test(value: String) {
+    print(value)
   }
   
   func createFolder(name: String) {

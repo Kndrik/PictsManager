@@ -47,6 +47,7 @@
 		2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */; };
 		2F9DD9162BA9A29600567854 /* FavoritesAlbumPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */; };
 		2FB225D42BBBFF2100E15984 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB225D32BBBFF2100E15984 /* AlbumsViewModel.swift */; };
+		2FC40AB82BE12A4B0060CF84 /* AlbumCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC40AB72BE12A4B0060CF84 /* AlbumCreation.swift */; };
 		346DB3572BD7B3A500D81059 /* AlbumPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3562BD7B3A500D81059 /* AlbumPhotosViewModel.swift */; };
 		346DB3592BD7B3D100D81059 /* AlbumPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346DB3582BD7B3D100D81059 /* AlbumPhotosView.swift */; };
 		34CAE0CC2BA0564C00381E39 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAE0CB2BA0564C00381E39 /* HomeScreen.swift */; };
@@ -106,6 +107,7 @@
 		2F9DD9132BA99CF400567854 /* MyAlbumsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumsRow.swift; sourceTree = "<group>"; };
 		2F9DD9152BA9A29600567854 /* FavoritesAlbumPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAlbumPreview.swift; sourceTree = "<group>"; };
 		2FB225D32BBBFF2100E15984 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
+		2FC40AB72BE12A4B0060CF84 /* AlbumCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCreation.swift; sourceTree = "<group>"; };
 		346DB3562BD7B3A500D81059 /* AlbumPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPhotosViewModel.swift; sourceTree = "<group>"; };
 		346DB3582BD7B3D100D81059 /* AlbumPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPhotosView.swift; sourceTree = "<group>"; };
 		34CAE0CB2BA0564C00381E39 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		220C46D92BB8BBD8008FCAC8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2FC40AB62BE12A240060CF84 /* Request */,
 				346DB3512BD7A78700D81059 /* AlbumPhotos */,
 				2F9DD9092BA768B700567854 /* AlbumsScreen.swift */,
 				22231A9F2BB322580061E028 /* AlbumsListView.swift */,
@@ -386,6 +389,14 @@
 			path = Albums;
 			sourceTree = "<group>";
 		};
+		2FC40AB62BE12A240060CF84 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				2FC40AB72BE12A4B0060CF84 /* AlbumCreation.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		346DB3512BD7A78700D81059 /* AlbumPhotos */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +587,7 @@
 				2F9DD9162BA9A29600567854 /* FavoritesAlbumPreview.swift in Sources */,
 				22D8B6342B98F1C300734A99 /* AuthViewModel.swift in Sources */,
 				34CAE0D72BA0622B00381E39 /* UserSessionManager.swift in Sources */,
+				2FC40AB82BE12A4B0060CF84 /* AlbumCreation.swift in Sources */,
 				34CAE0D32BA05D5800381E39 /* LoginForm.swift in Sources */,
 				34CAE0D52BA05DA900381E39 /* RegisterForm.swift in Sources */,
 				34DAE59E2BB2D40900C70075 /* CameraView.swift in Sources */,
