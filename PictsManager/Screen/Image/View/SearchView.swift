@@ -13,25 +13,27 @@ struct Search: View {
     @State var searchResults: [Album] = []
     @State private var searchText = ""
     
-//    private let countries = ["France", "England", "USA", "Vietnam", "Japan", "Korea"]
-//    private var searchResults : [String] {
-//        searchText.isEmpty ? countries : countries.filter { $0.contains(searchText) }
-//    }
-    
     var body: some View {
         NavigationView {
-            VStack {
-//                Text("Hello")
+            ZStack {
                 List(searchResults, id: \.self) { album in
-                    Text(album.title)
+                    NavigationLink(destination: AlbumPhotosView(album: album)) {
+                        AlbumPreview(album: album, isFavorite: false)
+                    }
                 }
-                
-//                Text($albumsViewModel.object)
+                .listStyle(PlainListStyle())
             }
             .navigationTitle("Rechercher")
             .searchable(text: $searchText)
             .onChange(of: searchText) { _ in
                 searchAlbums()
+            }
+        }
+        .task {
+            do {
+                try await albumsViewModel.fetchAlbums()
+            } catch {
+              print("Error fetching albums: \(error)")
             }
         }
     }
