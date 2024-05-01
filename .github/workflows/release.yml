@@ -1,0 +1,21 @@
+name: Create Release on main merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-release:
+
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

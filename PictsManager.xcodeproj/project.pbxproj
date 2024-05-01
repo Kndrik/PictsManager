@@ -36,6 +36,7 @@
 		22D8B6342B98F1C300734A99 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8B6332B98F1C300734A99 /* AuthViewModel.swift */; };
 		22DCFAAF2BB085740019A59F /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DCFAAE2BB085740019A59F /* UserResponse.swift */; };
 		22EEC3EB2BC57D5200365B20 /* PeriodConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEC3EA2BC57D5200365B20 /* PeriodConstants.swift */; };
+		22FC2FDE2BE238AE0001259B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FC2FDD2BE238AE0001259B /* MapView.swift */; };
 		2F15DE872B96075400D74795 /* PictsManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F15DE862B96075400D74795 /* PictsManagerApp.swift */; };
 		2F15DE8B2B96075500D74795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F15DE8A2B96075500D74795 /* Assets.xcassets */; };
 		2F15DE8E2B96075500D74795 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F15DE8D2B96075500D74795 /* Preview Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		22D8B6332B98F1C300734A99 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		22DCFAAE2BB085740019A59F /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		22EEC3EA2BC57D5200365B20 /* PeriodConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodConstants.swift; sourceTree = "<group>"; };
+		22FC2FDD2BE238AE0001259B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		2F15DE832B96075400D74795 /* PictsManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictsManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F15DE862B96075400D74795 /* PictsManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictsManagerApp.swift; sourceTree = "<group>"; };
 		2F15DE8A2B96075500D74795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				1A4A09EA2BA063D90006D27F /* PhotosView.swift */,
 				1A4A09EE2BA064630006D27F /* SearchView.swift */,
+				22FC2FDD2BE238AE0001259B /* MapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				34CAE0D72BA0622B00381E39 /* UserSessionManager.swift in Sources */,
 				34CAE0D32BA05D5800381E39 /* LoginForm.swift in Sources */,
 				34CAE0D52BA05DA900381E39 /* RegisterForm.swift in Sources */,
+				22FC2FDE2BE238AE0001259B /* MapView.swift in Sources */,
 				34DAE59E2BB2D40900C70075 /* CameraView.swift in Sources */,
 				34DAE59C2BB2D3FF00C70075 /* CameraViewModel.swift in Sources */,
 				22BB3B622BA8C5A800A94254 /* ToastModifier.swift in Sources */,
@@ -729,6 +733,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for capturing photos.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -762,6 +767,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used for capturing photos.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

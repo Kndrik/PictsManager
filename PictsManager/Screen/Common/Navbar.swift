@@ -45,6 +45,12 @@ struct Navbar: View {
                     }
                     .environmentObject(albumsViewModel)
                 
+                MapView()
+                    .tabItem {
+                        Image(systemName: "map.fill")
+                        Text("Map")
+                    }
+                
                 UserScreen(userViewModel: UserViewModel(), authViewModel: AuthViewModel())
                     .tabItem {
                         Image(systemName: "person.crop.circle.fill")
