@@ -76,7 +76,6 @@ class AlbumsViewModel: ObservableObject {
   }
   
   func createAlbum(name: String) async throws {
-    print("Creating album...")
     guard let url = URL(string: urlString) else {
       Logger.album.debug("Invalid URL for /albums endpoint")
       return
@@ -96,15 +95,10 @@ class AlbumsViewModel: ObservableObject {
     let albumRequest = AlbumCreation(name: name)
     
     let bodyJson = try JSONEncoder().encode(albumRequest)
-    print(bodyJson)
     request.httpBody = bodyJson
     
     let (data, response) = try await URLSession.shared.data(for: request)
     guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
-  }
-  
-  func test(value: String) {
-    print(value)
   }
   
   func createFolder(name: String) {
