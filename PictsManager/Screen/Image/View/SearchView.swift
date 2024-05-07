@@ -9,8 +9,6 @@ import SwiftUI
 
 struct Search: View {
     @EnvironmentObject var albumsViewModel: AlbumsViewModel
-    @State var searchAlbumResults: [Album] = []
-    @State var searchImageResults: [Photo] = []
     @State var filteredPhotos: [Photo] = []
     @State var searchResults: [SearchItem] = []
     @State private var searchText = ""
@@ -24,7 +22,7 @@ struct Search: View {
                         AlbumPreview(album: album, isFavorite: false)
                     }
                 case .image(let photo):
-                    NavigationLink(destination: ImageDetails(photo: photo, photos: $searchImageResults)) {
+                    NavigationLink(destination: ImageDetails(photo: photo, photos: $filteredPhotos)) {
                         Text(photo.filename)
                     }
                 }
@@ -62,7 +60,7 @@ struct Search: View {
             var results = searchResults
             
             for album in albumsViewModel.albumsData?.albums ?? [] {
-                let filteredPhotos = album.pictures.filter {
+                filteredPhotos = album.pictures.filter {
                     $0.filename.localizedCaseInsensitiveContains(searchText)
                 }
                 results.append(contentsOf: filteredPhotos.map { SearchItem.image($0) })
