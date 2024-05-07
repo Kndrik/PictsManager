@@ -14,6 +14,7 @@ struct AlbumsScreen: View {
   @State private var addingFolder = false;
   @State private var title = ""
   @State private var folderName = ""
+  @State private var isEmpty = true
   
   var body: some View {
     NavigationSplitView {
@@ -37,11 +38,13 @@ struct AlbumsScreen: View {
           }
           .alert("Nouvel album", isPresented: $addingAlbum) {
             TextField("Titre", text: $title)
+            
             Button {
               title = ""
             } label: {
               Text("Annuler")
             }
+            
             Button {
               Task {
                 try await albumsViewModel.createAlbum(name: title)
@@ -51,6 +54,7 @@ struct AlbumsScreen: View {
               Text("Enregistrer")
             }
 //            .disabled(title.isEmpty)
+            
           } message: {
             Text("Saisissez un nom pour cet album.")
           }
