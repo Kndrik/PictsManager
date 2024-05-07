@@ -9,24 +9,23 @@ import SwiftUI
 
 struct Search: View {
     @EnvironmentObject var albumsViewModel: AlbumsViewModel
-    @State var searchResults: [SearchResult] = []
+    @State var searchAlbumResults: [Album] = []
+    @State var searchImageResults: [Photo] = []
     @State var filteredPhotos: [Photo] = []
+    @State var searchResults: [SearchItem] = []
     @State private var searchText = ""
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(searchResults, id: \.id) { result in
-                    switch result {
-                    case .album(let album):
-                        NavigationLink(destination: AlbumPhotosView(album: album)) {
-                            AlbumPreview(album: album, isFavorite: false)
-                        }
-                    case .photo(let photo):
+            List(searchResults, id: \.id) { item in
+                switch item {
+                case .album(let album):
+                    NavigationLink(destination: AlbumPhotosView(album: album)) {
+                        AlbumPreview(album: album, isFavorite: false)
+                    }
+                case .image(let photo):
+                    NavigationLink(destination: ImageDetails(photo: photo, photos: $searchImageResults)) {
                         Text(photo.filename)
-//                        NavigationLink(destination: ImageDetails(photo: photo, photos: filter)) {
-//                            Text(photo.filename)
-//                        }
                     }
                 }
             }
@@ -36,54 +35,63 @@ struct Search: View {
             .onChange(of: searchText) { _ in
                 searchResults = []
                 searchAlbums()
-                searchPhotos()
+                searchImages()
             }
         }
         .task {
             do {
                 try await albumsViewModel.fetchAlbums()
             } catch {
-              print("Error fetching albums: \(error)")
+                print("Error fetching albums: \(error)")
             }
         }
     }
     
     private func searchAlbums() {
         if !searchText.isEmpty {
-            if let albumsData = albumsViewModel.albumsData {
-                let filteredAlbums = albumsData.albums.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
-                searchResults.append(contentsOf: filteredAlbums.map { .album($0) })
-            }
+            searchResults = albumsViewModel.albumsData?.albums.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText)
+            }.map { SearchItem.album($0) } ?? []
+        } else {
+            searchResults = []
         }
     }
-    
-    private func searchPhotos() {
+
+    private func searchImages() {
         if !searchText.isEmpty {
-            var results = [SearchResult]()
+            var results = searchResults
+            
             for album in albumsViewModel.albumsData?.albums ?? [] {
-                let filteredPhotos = album.pictures.filter { $0.filename.localizedCaseInsensitiveContains(searchText) }
-                results.append(contentsOf: filteredPhotos.map { .photo($0) })
+                let filteredPhotos = album.pictures.filter {
+                    $0.filename.localizedCaseInsensitiveContains(searchText)
+                }
+                results.append(contentsOf: filteredPhotos.map { SearchItem.image($0) })
             }
-            searchResults.append(contentsOf: results)
+            
+            searchResults = results
+        } else {
+            searchResults = []
         }
     }
 }
 
-
-enum SearchResult: Identifiable {
+enum SearchItem {
     case album(Album)
-    case photo(Photo)
+    case image(Photo)
     
     var id: String {
         switch self {
+            
         case .album(let album):
-            return album.id ?? UUID().uuidString
-        case .photo(let photo):
+            return album.id ?? ""
+            
+        case .image(let photo):
             return photo.id
         }
     }
 }
 
-#Preview {
-    Search()
-}
+
+//#Preview {
+//    Search()
+//}
