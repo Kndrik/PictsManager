@@ -21,7 +21,6 @@ class AlbumsViewModel: ObservableObject {
   }
   
   func fetchAlbums() async throws {
-    print("fetching albums...")
     guard let url = URL(string: urlString) else {
       Logger.album.debug("Invalid URL for /albums endpoint")
       return
@@ -101,7 +100,23 @@ class AlbumsViewModel: ObservableObject {
     guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
   }
   
-  func createFolder(name: String) {
-    print("Create folder \(name)")
+  func deleteAlbum(albumId: String) async throws {
+    guard let url = URL(string: (urlString+albumId)) else {
+      Logger.album.debug("Invalid URL for /albums/album_id endpoint")
+      return
+    }
+    
+    guard let token = UserSessionManager.shared.getToken() else {
+      Logger.user.error("User not authenticated")
+      return
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+    
+    request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
   }
 }

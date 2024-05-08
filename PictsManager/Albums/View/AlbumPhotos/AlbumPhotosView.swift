@@ -9,9 +9,12 @@ import SwiftUI
 
 struct AlbumPhotosView: View {
   @StateObject var albumPhotosViewModel = AlbumPhotosViewModel()
+  @StateObject var albumsViewModel = AlbumsViewModel()
   @State var album: Album
   @State private var selectedPeriodIndex = 3
   @State private var deletingAlbum = false
+  @Environment(\.presentationMode) var presentationMode
+  
   let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
   
   var body: some View {
@@ -55,7 +58,10 @@ struct AlbumPhotosView: View {
             }
             .alert("Supprimer « \(album.title) »", isPresented: $deletingAlbum) {
               Button(role:.destructive) {
-                // Delete
+                Task {
+                  try await albumsViewModel.deleteAlbum(albumId: album.id ?? "")
+                  presentationMode.wrappedValue.dismiss()
+                }
               } label: {
                 Text("Oui")
               }
@@ -83,6 +89,7 @@ struct AlbumPhotosView: View {
       }
     }
   }
+  
   func updatePhotoWithImage(id: String, imageData: Data)  async {
     if let index = album.pictures.firstIndex(where: { $0.id == id }) {
       DispatchQueue.main.async {
@@ -91,7 +98,6 @@ struct AlbumPhotosView: View {
     }
   }
 }
-
 
 #Preview {
   AlbumPhotosView(album: Album(owner_id: "12345", pictures: [], title: "Test album"))

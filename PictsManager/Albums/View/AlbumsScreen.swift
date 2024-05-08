@@ -17,7 +17,7 @@ struct AlbumsScreen: View {
   @State private var isEmpty = true
   
   var body: some View {
-    NavigationSplitView {
+    NavigationView {
       VStack {
         List {
           if let albumsData = albumsViewModel.albumsData,
@@ -31,6 +31,7 @@ struct AlbumsScreen: View {
         }
         .listStyle(.inset)
       }
+      .navigationTitle("Albums")
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
           Menu("AddAlbumMenu", systemImage: "plus") {
@@ -49,6 +50,7 @@ struct AlbumsScreen: View {
               Task {
                 try await albumsViewModel.createAlbum(name: title)
                 try await albumsViewModel.fetchAlbums()
+                title = ""
               }
             } label: {
               Text("Enregistrer")
@@ -60,9 +62,6 @@ struct AlbumsScreen: View {
           }
         }
       }
-      .navigationTitle("Albums")
-    } detail: {
-      Text("Album list")
     }
     .task {
       do {
