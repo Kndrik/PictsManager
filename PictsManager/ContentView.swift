@@ -2,23 +2,21 @@
 //  ContentView.swift
 //  PictsManager
 //
-//  Created by Charles Lamarque on 04/03/2024.
+//  Created by Valentin Caure on 12/03/2024.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View {    
+    @EnvironmentObject var toastManager: ToastManager
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        AuthScreen().environmentObject(toastManager)
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView().environmentObject(ToastManager())
+    }
 }
