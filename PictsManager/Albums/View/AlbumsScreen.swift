@@ -14,9 +14,10 @@ struct AlbumsScreen: View {
   @State private var addingFolder = false;
   @State private var title = ""
   @State private var folderName = ""
+  @State private var isEmpty = true
   
   var body: some View {
-    NavigationSplitView {
+    NavigationView {
       VStack {
         List {
           if let albumsData = albumsViewModel.albumsData,
@@ -30,6 +31,7 @@ struct AlbumsScreen: View {
         }
         .listStyle(.inset)
       }
+      .navigationTitle("Albums")
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
           Menu("AddAlbumMenu", systemImage: "plus") {
@@ -37,43 +39,29 @@ struct AlbumsScreen: View {
           }
           .alert("Nouvel album", isPresented: $addingAlbum) {
             TextField("Titre", text: $title)
+            
             Button {
               title = ""
-              addingAlbum.toggle()
             } label: {
               Text("Annuler")
             }
+            
             Button {
-//                albumsViewModel.createAlbum(name: title)
+              Task {
+                try await albumsViewModel.createAlbum(name: title)
+                try await albumsViewModel.fetchAlbums()
+                title = ""
+              }
             } label: {
               Text("Enregistrer")
             }
-            .disabled(title.isEmpty)
+//            .disabled(title.isEmpty)
+            
           } message: {
             Text("Saisissez un nom pour cet album.")
           }
-          .alert("Nouveau dossier", isPresented: $addingFolder) {
-            TextField("Titre", text: $folderName)
-            Button {
-              folderName = ""
-              addingFolder.toggle()
-            } label: {
-              Text("Annuler")
-            }
-            Button {
-//                albumsViewModel.createFolder(name: folderName)
-            } label: {
-              Text("Enregistrer")
-            }
-            .disabled(folderName.isEmpty)
-          } message: {
-            Text("Saisissez un nom pour ce dossier.")
-          }
         }
       }
-      .navigationTitle("Albums")
-    } detail: {
-      Text("Album list")
     }
     .task {
       do {
@@ -92,5 +80,6 @@ struct AlbumsScreen_Previews: PreviewProvider {
   static var previews: some View {
     AlbumsScreen()
       .environmentObject(AlbumsViewModel())
+      .environmentObject(PhotosViewModel())
   }
 }
