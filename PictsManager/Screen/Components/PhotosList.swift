@@ -29,6 +29,10 @@ struct PhotosList: View {
                     }
                 }
                 Color.clear.frame(height: 55)
+                
+                Spacer()
+                Text("\(photos.count) photos")
+                    .bold()
             }
         }
     }
