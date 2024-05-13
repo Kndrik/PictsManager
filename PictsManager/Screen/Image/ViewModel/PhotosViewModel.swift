@@ -62,6 +62,12 @@ class PhotosViewModel: ObservableObject {
                     }
                 }
             }
+            
+            await MainActor.run {
+                self.pictures = self.pictures.filter { picture in
+                    newPictures.contains(where: { $0.id == picture.id })
+                }
+            }
         } catch {
             await MainActor.run {
                 self.errorMessage = error.localizedDescription
