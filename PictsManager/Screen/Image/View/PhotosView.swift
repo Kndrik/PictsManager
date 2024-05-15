@@ -11,17 +11,17 @@ struct PhotosView: View {
     @StateObject var photosViewModel = PhotosViewModel()
     @State private var selectedPeriodIndex = 3
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
-
+    
     var body: some View {
         ZStack {
             VStack {
                 HStack {
-    
+                    
                     Text(periodTitles[selectedPeriodIndex])
-                      .bold()
-                      .font(.title2)
-                  
-                  Spacer()
+                        .bold()
+                        .font(.title2)
+                    
+                    Spacer()
                     
                     HStack {
                         Button(action: {
@@ -54,7 +54,7 @@ struct PhotosView: View {
                 
                 Spacer()
                 
-                PhotosList(photos: $photosViewModel.pictures)
+//                PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShowingSheet: $isShowingSheet)
             }
         }
         .onAppear {
@@ -65,6 +65,6 @@ struct PhotosView: View {
     }
 }
 
-#Preview {
-    PhotosView()
-}
+//#Preview {
+//    PhotosView()
+//}

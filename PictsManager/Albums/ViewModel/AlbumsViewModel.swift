@@ -119,4 +119,63 @@ class AlbumsViewModel: ObservableObject {
     let (data, response) = try await URLSession.shared.data(for: request)
     guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
   }
+    
+
+    func uploadImagesToAlbum(picture_id: String, album_id: String, completion: @escaping (Bool) -> Void) async {
+        let uploadString = urlString + album_id
+
+        guard let url = URL(string: uploadString) else {
+            Logger.album.debug("Invalid URL for /{album_id} endpoint")
+            completion(false)
+            return
+        }
+        
+        print(url)
+        
+        guard let token = UserSessionManager.shared.getToken() else {
+            Logger.user.error("User not authenticated")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let imageIdRequest = ImageIdRequest(picture_id: picture_id)
+        
+        if let bodyJson = try? JSONEncoder().encode(imageIdRequest) {
+            request.httpBody = bodyJson
+            print(bodyJson)
+        } else {
+            Logger.album.error("Failed to encode data")
+            completion(false)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                Logger.user.error("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
+                completion(false)
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                if (try? JSONDecoder().decode(ImageIdRequest.self, from: data)) != nil {
+                    completion(true)
+                }
+            } else {
+                if let errorMessage = String(data: data, encoding: .utf8) {
+                    Logger.album.error("\(errorMessage)")
+                } else {
+                    Logger.album.error("\(error?.localizedDescription ?? "Unknown error")")
+                }
+                completion(false)
+            }
+        }.resume()
+        
+//        let (data, response) = try await URLSession.shared.data(for: request)
+//        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
+    }
 }
