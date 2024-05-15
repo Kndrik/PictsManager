@@ -14,7 +14,7 @@ struct PhotosSelectionToAlbum: View {
     @Binding var isShowingSheet: Bool
     @State private var selectedPhotos: [String] = []
     @State var album: Album
-    var onAddPhotos: () -> Void
+    var onAddPhotos: ([Photo]) -> Void
     @State private var showErrorAlert = false
 
     var body: some View {
@@ -42,7 +42,7 @@ struct PhotosSelectionToAlbum: View {
                                                 print("success")
                                                 Task {
 //                                                    let newPhotos = await photosViewModel.getPicturesList()
-                                                    onAddPhotos()
+//                                                    onAddPhotos()
                                                 }
                                             } else {
                                                 print("lol")
