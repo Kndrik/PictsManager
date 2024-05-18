@@ -10,6 +10,7 @@ import SwiftUI
 struct PhotosView: View {
     @StateObject var photosViewModel = PhotosViewModel()
     @State private var selectedPeriodIndex = 3
+    @State private var isShowingSheet = false
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
     
     var body: some View {
@@ -54,7 +55,8 @@ struct PhotosView: View {
                 
                 Spacer()
                 
-              PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShowingSheet: $isShowingSheet, isShared: false, albumId: "")
+//              PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShowingSheet: $isShowingSheet, isShared: false, albumId: "")
+              PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShared: false, albumId: "", isShowingSheet: $isShowingSheet, onAddPhotos: addPhotos)
             }
         }
         .onAppear {
@@ -63,6 +65,10 @@ struct PhotosView: View {
             }
         }
     }
+  
+  func addPhotos(photos: [Photo]) {
+    
+  }
 }
 
 //#Preview {

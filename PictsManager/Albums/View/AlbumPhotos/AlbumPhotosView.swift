@@ -15,6 +15,7 @@ struct AlbumPhotosView: View {
     @State private var selectedPeriodIndex = 3
     @State private var deletingAlbum = false
     @State private var isShowingSheet = false
+    @State private var sharingAlbum = false
     @State private var email = ""
     @Environment(\.presentationMode) var presentationMode
     var isShared: Bool
