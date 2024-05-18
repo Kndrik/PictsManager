@@ -15,6 +15,8 @@
 		2209B00D2BA77B3100036F36 /* UserScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209B00C2BA77B3100036F36 /* UserScreen.swift */; };
 		220C46DF2BB9D687008FCAC8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C46DE2BB9D687008FCAC8 /* Logger.swift */; };
 		22231AA02BB322580061E028 /* AlbumsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22231A9F2BB322580061E028 /* AlbumsListView.swift */; };
+		2254B4F22BF25DD2009D2443 /* PhotosSelectionToAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2254B4F12BF25DD2009D2443 /* PhotosSelectionToAlbum.swift */; };
+		2254B4F42BF397FB009D2443 /* ImageIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2254B4F32BF397FB009D2443 /* ImageIdRequest.swift */; };
 		225F51752BAB57A400B60E7F /* ScreenLinearColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F51742BAB57A400B60E7F /* ScreenLinearColor.swift */; };
 		226B369C2B9EED44001BB288 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B369B2B9EED44001BB288 /* Api.swift */; };
 		226B369E2B9EFE2B001BB288 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B369D2B9EFE2B001BB288 /* RegisterScreen.swift */; };
@@ -77,6 +79,8 @@
 		2209B00C2BA77B3100036F36 /* UserScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreen.swift; sourceTree = "<group>"; };
 		220C46DE2BB9D687008FCAC8 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		22231A9F2BB322580061E028 /* AlbumsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsListView.swift; sourceTree = "<group>"; };
+		2254B4F12BF25DD2009D2443 /* PhotosSelectionToAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSelectionToAlbum.swift; sourceTree = "<group>"; };
+		2254B4F32BF397FB009D2443 /* ImageIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIdRequest.swift; sourceTree = "<group>"; };
 		225F51742BAB57A400B60E7F /* ScreenLinearColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLinearColor.swift; sourceTree = "<group>"; };
 		226B369B2B9EED44001BB288 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		226B369D2B9EFE2B001BB288 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				34DAE5AD2BC436F300C70075 /* ImageDetailsViewModel.swift */,
 				22EEC3EA2BC57D5200365B20 /* PeriodConstants.swift */,
 				34DAE5AF2BC5846900C70075 /* ImageDetails.swift */,
+				2254B4F12BF25DD2009D2443 /* PhotosSelectionToAlbum.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 			children = (
 				2FC40AB72BE12A4B0060CF84 /* AlbumCreation.swift */,
 				2FAD12B42BF397D8005F983F /* AlbumSharing.swift */,
+				2254B4F32BF397FB009D2443 /* ImageIdRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -576,6 +582,7 @@
 				2F9DD9102BA8795700567854 /* AlbumPreview.swift in Sources */,
 				2F9DD9142BA99CF400567854 /* MyAlbumsRow.swift in Sources */,
 				226B369C2B9EED44001BB288 /* Api.swift in Sources */,
+				2254B4F22BF25DD2009D2443 /* PhotosSelectionToAlbum.swift in Sources */,
 				2F9DD9122BA8797400567854 /* Album.swift in Sources */,
 				2F9DD90C2BA84DCD00567854 /* AlbumRow.swift in Sources */,
 				22D8B6322B98F06100734A99 /* LoginScreen.swift in Sources */,
@@ -594,6 +601,7 @@
 				22BB3B5E2BA89C8A00A94254 /* Toast.swift in Sources */,
 				22EEC3EB2BC57D5200365B20 /* PeriodConstants.swift in Sources */,
 				22946C582BA3A0CA0052B612 /* AuthScreen.swift in Sources */,
+				2254B4F42BF397FB009D2443 /* ImageIdRequest.swift in Sources */,
 				2F9DD9162BA9A29600567854 /* FavoritesAlbumPreview.swift in Sources */,
 				22D8B6342B98F1C300734A99 /* AuthViewModel.swift in Sources */,
 				34CAE0D72BA0622B00381E39 /* UserSessionManager.swift in Sources */,
