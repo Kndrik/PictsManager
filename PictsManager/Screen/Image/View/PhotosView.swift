@@ -56,7 +56,7 @@ struct PhotosView: View {
                 Spacer()
                 
 //              PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShowingSheet: $isShowingSheet, isShared: false, albumId: "")
-              PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShared: false, albumId: "", isShowingSheet: $isShowingSheet, onAddPhotos: addPhotos)
+                PhotosList(photosViewModel: photosViewModel, photos: $photosViewModel.pictures, isShared: false, albumId: "", isShowingSheet: $isShowingSheet, onAddPhotos: addPhotos, isInPhotosView: true)
             }
         }
         .onAppear {
