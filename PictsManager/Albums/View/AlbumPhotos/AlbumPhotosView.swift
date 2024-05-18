@@ -114,6 +114,11 @@ struct AlbumPhotosView: View {
                     }
                     isShowingSheet = false
                 }
+                .refreshable {
+                    Task {
+                        await photosViewModel.getPicturesList()
+                    }
+                }
             }
         }
         .onAppear {
