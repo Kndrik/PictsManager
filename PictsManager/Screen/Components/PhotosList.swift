@@ -20,13 +20,15 @@ struct PhotosList: View {
     @Binding var isShowingSheet: Bool
     var onAddPhotos: ([Photo]) -> Void
     let columns = Array(repeating: GridItem(.adaptive(minimum: 100, maximum: .infinity), spacing: 5), count: 3)
-  
+    
+    var isInPhotosView: Bool = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(photos.indices, id: \.self) { index in
-                      NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos, isShared: isShared, albumId: albumId)) {
+                        NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos, isShared: isShared, albumId: albumId)) {
                             ImageLoader(photo: photos[index])
                                 .aspectRatio(contentMode: .fill)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -35,30 +37,33 @@ struct PhotosList: View {
                         }
                     }
                     
-                    Button (action: {
-                        isShowingSheet.toggle()
-                    }) {
-                        Image(systemName: "plus")
-                            .font(.system(size: 25))
-                            .bold()
-                            .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .clipped()
-                            .aspectRatio(1, contentMode: .fit)
-                    }
-                    .background(.gray)
-                    .sheet(isPresented: $isShowingSheet) {
-                        if let alb = album {
-                            PhotosSelectionToAlbum(isShowingSheet: $isShowingSheet, album: alb) { newPhotos in
-                                onAddPhotos(newPhotos)
+                    if !isInPhotosView {
+                        Button (action: {
+                            isShowingSheet.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 25))
+                                .bold()
+                                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                .clipped()
+                                .aspectRatio(1, contentMode: .fit)
+                        }
+                        .background(.gray)
+                        .sheet(isPresented: $isShowingSheet) {
+                            if let alb = album {
+                                PhotosSelectionToAlbum(isShowingSheet: $isShowingSheet, album: alb) { newPhotos in
+                                    onAddPhotos(newPhotos)
+                                }
                             }
                         }
+                        
                     }
                 }
                 Color.clear.frame(height: 55)
                 
                 Spacer()
-                Text("\(photos.count) photos")
+                Text("\(photos.count) \(photos.count == 1 || photos.count == 0 ? "photo" : "photos")")
                     .bold()
             }
         }
