@@ -40,16 +40,13 @@ struct PhotosSelectionToAlbum: View {
                                         DispatchQueue.main.async {
                                             if success {
                                                 print("success")
-                                                Task {
-//                                                    let newPhotos = await photosViewModel.getPicturesList()
-//                                                    onAddPhotos()
-                                                }
                                             } else {
                                                 print("lol")
                                                 showErrorAlert = true
                                             }
                                         }
                                     }
+                                    isShowingSheet = false
                                 }
                             }
                         }) {
