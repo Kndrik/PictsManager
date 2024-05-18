@@ -18,11 +18,11 @@ struct Search: View {
             List(searchResults, id: \.id) { item in
                 switch item {
                 case .album(let album):
-                    NavigationLink(destination: AlbumPhotosView(album: album)) {
-                        AlbumPreview(album: album, isFavorite: false)
+                  NavigationLink(destination: AlbumPhotosView(album: album, isShared: false)) {
+                    AlbumPreview(album: album, isFavorite: false, isShared: false)
                     }
                 case .image(let photo):
-                    NavigationLink(destination: ImageDetails(photo: photo, photos: $filteredPhotos)) {
+                  NavigationLink(destination: ImageDetails(photo: photo, photos: $filteredPhotos, isShared: false, albumId: "")) {
                         Text(photo.filename)
                     }
                 }

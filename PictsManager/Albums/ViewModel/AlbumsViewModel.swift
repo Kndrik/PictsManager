@@ -11,9 +11,11 @@ import OSLog
 class AlbumsViewModel: ObservableObject {
   @Published var albumsData: AlbumCollection?
   @Published var favAlbumData: Album?
+  @Published var sharedAlbumsData: AlbumCollection?
   
   let urlString = Api.Album.albumList
   let favUrlString = Api.Album.favAlbum
+  let sharedUrlString = Api.Album.sharedAlbums
   
   enum FetchError: Error {
     case badRequest
@@ -42,7 +44,7 @@ class AlbumsViewModel: ObservableObject {
       do {
         albumsData = try JSONDecoder().decode(AlbumCollection.self, from: data)
       } catch {
-        Logger.album.error("Error decoding json: \(error)")
+        Logger.album.error("Error decoding albums json: \(error)")
       }
     }
   }
@@ -69,7 +71,34 @@ class AlbumsViewModel: ObservableObject {
       do {
         favAlbumData = try JSONDecoder().decode(Album.self, from: data)
       } catch {
-        Logger.album.error("Error decoding json: \(error)")
+        Logger.album.error("Error decoding fav album json: \(error)")
+      }
+    }
+  }
+  
+  func fetchSharedAlbums() async throws {
+    guard let url = URL(string: sharedUrlString) else {
+      Logger.album.debug("Invalid URL for shared albums endpoint")
+      return
+    }
+    
+    guard let token = UserSessionManager.shared.getToken() else {
+      Logger.user.error("User not authenticated")
+      return
+    }
+    
+    var request = URLRequest(url: url)
+    
+    request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
+    
+    Task { @MainActor in
+      do {
+        sharedAlbumsData = try JSONDecoder().decode(AlbumCollection.self, from: data)
+      } catch {
+        Logger.album.error("Error decoding shared album json: \(error)")
       }
     }
   }

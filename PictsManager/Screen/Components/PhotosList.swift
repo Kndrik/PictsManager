@@ -11,6 +11,8 @@ struct PhotosList: View {
     @Binding var photos: [Photo]
     @State var picture_ids: [String]?
     @State private var selectedPhoto: Photo?
+    var isShared: Bool
+    var albumId: String
 
     var body: some View {
         let columns = Array(repeating: GridItem(.adaptive(minimum: 100, maximum: .infinity), spacing: 5), count: 3)
@@ -19,7 +21,7 @@ struct PhotosList: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(photos.indices, id: \.self) { index in
-                        NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos)) {
+                      NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos, isShared: isShared, albumId: albumId)) {
                             ImageLoader(photo: photos[index])
                                 .aspectRatio(contentMode: .fill)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

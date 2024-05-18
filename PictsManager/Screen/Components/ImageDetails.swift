@@ -16,7 +16,9 @@ struct ImageDetails: View {
     @State private var showingDeleteAlert = false
     @State private var showingPopover = false
     @State private var email = ""
-    
+    var isShared: Bool
+  var albumId: String
+  
     var body: some View {
         VStack {
             Spacer()
@@ -76,7 +78,11 @@ struct ImageDetails: View {
         }
         .onAppear {
             Task {
+              if (isShared) {
+                await imageDetailsViewModel.getSharedPictureById(albumId: albumId, pictureId: photo.id)
+              } else {
                 await imageDetailsViewModel.getPictureById(pictureId: photo.id)
+              }
             }
         }
     }

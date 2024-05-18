@@ -22,9 +22,11 @@ struct AlbumsScreen: View {
         List {
           if let albumsData = albumsViewModel.albumsData,
              let favAlbum = albumsViewModel.favAlbumData,
+             let sharedAlbumsData = albumsViewModel.sharedAlbumsData,
              photosViewModel.pictures.count > 0 {
             let recentAlbum = Album(cover_id: photosViewModel.pictures[0].id, owner_id: favAlbum.owner_id, pictures: photosViewModel.pictures, title: "Récentes")
             MyAlbumsRow(rowTitle: "Mes albums", albums: albumsData.albums, favAlbum: favAlbum, recentAlbum: recentAlbum, afficherToutButton: true)
+            AlbumRow(rowTitle: "Partagés", albums: sharedAlbumsData.albums, afficherToutButton: false)
           } else {
             Text("Loading albums")
           }
@@ -67,6 +69,7 @@ struct AlbumsScreen: View {
       do {
         try await albumsViewModel.fetchFavAlbum()
         try await albumsViewModel.fetchAlbums()
+        try await albumsViewModel.fetchSharedAlbums()
         await photosViewModel.getPicturesList()
       } catch {
         print("Error fetching albums: \(error)")
