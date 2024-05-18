@@ -15,7 +15,10 @@ struct AlbumPhotosView: View {
     @State private var selectedPeriodIndex = 3
     @State private var deletingAlbum = false
     @State private var isShowingSheet = false
+    @State private var sharingAlbum = false
+    @State private var email = ""
     @Environment(\.presentationMode) var presentationMode
+    var isShared: Bool
     
     let periodTitles = [PeriodConstants.years, PeriodConstants.months, PeriodConstants.days, PeriodConstants.all]
     
@@ -28,6 +31,7 @@ struct AlbumPhotosView: View {
                         .font(.title2)
                     Spacer()
                     
+                  if (!isShared) {
                     HStack {
                         Button(action: {
                             print("tapped")
@@ -43,9 +47,12 @@ struct AlbumPhotosView: View {
                         }
                         
                         Menu {
-                            Button("Supprimer l'album", systemImage: "trash", role: .destructive) {
-                                deletingAlbum.toggle()
-                            }
+                          Button("Supprimer l'album", systemImage: "trash", role: .destructive) {
+                            deletingAlbum.toggle()
+                          }
+                          Button("Partager l'album", systemImage: "person.fill.badge.plus") {
+                            sharingAlbum.toggle()
+                          }
                         } label: {
                             Button {
                                 print("tapped")
@@ -70,14 +77,38 @@ struct AlbumPhotosView: View {
                         } message: {
                             Text("Voulez-vous vraiment supprimer l'album « \(album.title) » ?")
                         }
-                    }
+                        .alert("Partager « \(album.title) »", isPresented: $sharingAlbum) {
+                          TextField("Email", text: $email)
+                            .autocapitalization(.none)
+                            .keyboardType(.emailAddress)
+                
+                          Button(role: .cancel) {
+                            sharingAlbum.toggle()
+                          } label: {
+                            Text("Annuler")
+                          }
+                
+                          Button {
+                            Task {
+                              // Share album et redirect
+                              try await albumPhotosViewModel.shareAlbumWithUser(albumId: album.id ?? "", email: email)
+                              presentationMode.wrappedValue.dismiss()
+                            }
+                          } label: {
+                            Text("Partager")
+                          }
+                        } message: {
+                          Text("Veuillez entrer l'email de l'utilisateur avec qui vous souhaitez partager l'album.")
+                        }
+                      }
+                  }
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
                 
                 Spacer()
                 
-                PhotosList(photosViewModel: photosViewModel, photos: $album.pictures, album: album, isShowingSheet: $isShowingSheet) { newPhotos in
+                PhotosList(photosViewModel: photosViewModel, photos: $album.pictures, album: album, isShared: isShared, albumId: album.id ?? "", isShowingSheet: $isShowingSheet) { newPhotos in
                     for photo in newPhotos {
                         album.pictures.append(photo)
                     }
@@ -86,24 +117,30 @@ struct AlbumPhotosView: View {
             }
         }
         .onAppear {
-            Task {
-                for picture in album.pictures {
-                    if let data = await albumPhotosViewModel.getLowPicturesById(pictureId: picture.id) {
-                        await updatePhotoWithImage(id: picture.id, imageData: data)
-                    }
+          Task {
+            for picture in album.pictures {
+              if (isShared) {
+                if let data = await albumPhotosViewModel.getLowPictureByAlbumId(albumId: album.id ?? "", pictureId: picture.id) {
+                  await updatePhotoWithImage(id: picture.id, imageData: data)
                 }
+              } else {
+                if let data = await albumPhotosViewModel.getLowPicturesById(pictureId: picture.id) {
+                  await updatePhotoWithImage(id: picture.id, imageData: data)
+                }
+              }
             }
+          }
         }
     }
     
     func updatePhotoWithImage(id: String, imageData: Data)  async {
-        if let index = album.pictures.firstIndex(where: { $0.id == id }) {
-            DispatchQueue.main.async {
-                album.pictures[index].imageData = imageData
-            }
+      if let index = album.pictures.firstIndex(where: { $0.id == id }) {
+        DispatchQueue.main.async {
+          album.pictures[index].imageData = imageData
         }
+      }
     }
-}
+  }
 
 //
 //#Preview {

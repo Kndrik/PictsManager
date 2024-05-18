@@ -10,6 +10,7 @@ import SwiftUI
 struct AlbumPreview: View {
   var album: Album
   var isFavorite: Bool
+  var isShared: Bool
   @StateObject private var imageFetcher = ImageFetcher()
   
   var body: some View {
@@ -27,18 +28,27 @@ struct AlbumPreview: View {
                   .padding(5)
             : nil
           }
-        Text(album.title)
-          .padding(.bottom, -8)
-        Text(String(album.pictures.count))
-          .foregroundStyle(Color.gray)
       } else {
-          Image(systemName: "photo")
+        Rectangle()
+          .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
+          .frame(width: 170, height: 170)
+          .cornerRadius(3)
+          .overlay(alignment: .center) {
+            Image(systemName: "photo")
+          }
       }
+      Text(album.title)
+        .padding(.bottom, -8)
+      Text(String(album.pictures.count))
+        .foregroundStyle(Color.gray)
     }
     .task {
       do {
-        try await imageFetcher.fetchImage(picture_id: album.cover_id ?? "66129b60fea686857a14f12b", lowRes: true)
-        
+        if (isShared && album.cover_id != nil) {
+          try await imageFetcher.fetchSharedImage(album_id: album.id ?? "", picture_id: album.cover_id ?? "")
+        } else if (album.cover_id != nil) {
+          try await imageFetcher.fetchImage(picture_id: album.cover_id ?? "", lowRes: true)
+        }
       } catch {
         print("Error fetching image: \(error)")
       }

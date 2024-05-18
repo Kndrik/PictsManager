@@ -13,17 +13,20 @@ struct PhotosList: View {
     @State var album: Album?
     @State var picture_ids: [String]?
     @State private var selectedPhoto: Photo?
+
+    var isShared: Bool
+    var albumId: String
+  
     @Binding var isShowingSheet: Bool
     var onAddPhotos: ([Photo]) -> Void
-    
     let columns = Array(repeating: GridItem(.adaptive(minimum: 100, maximum: .infinity), spacing: 5), count: 3)
-    
+  
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 5) {
                     ForEach(photos.indices, id: \.self) { index in
-                        NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos)) {
+                      NavigationLink(destination: ImageDetails(photo: photos[index],photos: $photos, isShared: isShared, albumId: albumId)) {
                             ImageLoader(photo: photos[index])
                                 .aspectRatio(contentMode: .fill)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

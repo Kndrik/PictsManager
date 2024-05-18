@@ -51,18 +51,18 @@ struct MyAlbumsRow: View {
           HStack(alignment: .top, spacing: 10) {
               
             NavigationLink {
-                AlbumPhotosView(album: recentAlbum)
+              AlbumPhotosView(album: recentAlbum, isShared: false)
             } label: {
-              AlbumPreview(album: recentAlbum, isFavorite: false)
+              AlbumPreview(album: recentAlbum, isFavorite: false, isShared: false)
             }
             .buttonStyle(PlainButtonStyle())
               
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 == 0) {
                 NavigationLink {
-                  AlbumPhotosView(album: album)
+                  AlbumPhotosView(album: album, isShared: false)
                 } label: {
-                  AlbumPreview(album: album, isFavorite: false)
+                  AlbumPreview(album: album, isFavorite: false, isShared: false)
                 }
                 .buttonStyle(PlainButtonStyle())
               }
@@ -73,18 +73,18 @@ struct MyAlbumsRow: View {
             
           HStack(alignment: .top, spacing: 10) {
             NavigationLink {
-                AlbumPhotosView(album: favAlbum)
+              AlbumPhotosView(album: favAlbum, isShared: false)
             } label: {
-                AlbumPreview(album: favAlbum, isFavorite: true)
+              AlbumPreview(album: favAlbum, isFavorite: true, isShared: false)
             }
             .buttonStyle(PlainButtonStyle())
               
             ForEach(Array(albums.enumerated()), id: \.element) { index, album in
               if (index % 2 != 0) {
                 NavigationLink {
-                  AlbumPhotosView(album: album)
+                  AlbumPhotosView(album: album, isShared: false)
                 } label: {
-                  AlbumPreview(album: album, isFavorite: false)
+                  AlbumPreview(album: album, isFavorite: false, isShared: false)
                 }
                 .buttonStyle(PlainButtonStyle())
               }
