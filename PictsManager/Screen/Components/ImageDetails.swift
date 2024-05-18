@@ -37,6 +37,9 @@ struct ImageDetails: View {
           }
           
           Button(action: {
+            Task {
+              await imageDetailsViewModel.togglePictureFav(pictureId: photo.id)
+            }
             isLiked.toggle()
           }) {
             Image(systemName: isLiked ? "heart.fill" : "heart")
@@ -85,6 +88,7 @@ struct ImageDetails: View {
         } else {
           await imageDetailsViewModel.getPictureById(pictureId: photo.id)
         }
+        isLiked = photo.is_fav
       }
     }
   }

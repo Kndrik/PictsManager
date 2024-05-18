@@ -147,4 +147,32 @@ class ImageDetailsViewModel: ObservableObject {
     }
   }
   
+  func togglePictureFav(pictureId: String) async {
+    guard let url = URL(string: Api.Picture.pictureList + pictureId + "/fav") else {
+      Logger.imageDetails.error("Invalid URL for fav picture endpoint")
+      return
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "PATCH"
+    
+    if let token = UserSessionManager.shared.getToken() {
+      request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    } else {
+      Logger.imageDetails.error("User not authenticated")
+      return
+    }
+    
+    do {
+      let (data, response) = try await URLSession.shared.data(for: request)
+      guard let httpResponse = response as? HTTPURLResponse,
+        httpResponse.statusCode == 200 else {
+        Logger.imageDetails.error("Failed to toggle fav picture")
+        return
+      }
+    } catch {
+      Logger.imageDetails.error("\(error.localizedDescription)")
+    }
+  }
+  
 }
