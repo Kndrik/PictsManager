@@ -51,7 +51,7 @@ struct MyAlbumsRow: View {
           HStack(alignment: .top, spacing: 10) {
               
             NavigationLink {
-              AlbumPhotosView(album: recentAlbum)
+                AlbumPhotosView(album: recentAlbum)
             } label: {
               AlbumPreview(album: recentAlbum, isFavorite: false)
             }
